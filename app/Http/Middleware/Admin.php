@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class Admin
 {
@@ -16,10 +16,10 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::user()->accesslevel == 1){
+        if (Auth::user()->accesslevel == 1) {
             return redirect(url('/403'));
         }
-        
+
         return $next($request);
     }
 }

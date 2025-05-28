@@ -188,6 +188,9 @@ function addschedule(day,time_start,time_end){
             success: function(data){
                 $('#displayroom').html(data).fadeIn();
                 $('#myModal').modal('show');
+            },
+            error: function(xhr, status, error){
+                toastr.error('An error occurred while adding the schedule. Please try again.');
             }
         })
     }else{

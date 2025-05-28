@@ -56,6 +56,10 @@ function addoffer(course_id){
             success: function(data){
                 toastr.success(data,'Notification!');
                 searchcourse('{{$curriculum_year}}','{{$level}}','{{$period}}','{{$section_name}}')
+            },
+            error: function(xhr, status, error){
+                console.error('AJAX Error:', xhr.responseText);
+                toastr.error('Something went wrong while searching for courses', 'Notification!');
             }
         })
     }else{

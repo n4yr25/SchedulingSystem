@@ -34,49 +34,51 @@ class HomeController extends Controller
      *
      * @return Response
      */
-        public function index()
+    public function index()
     {
         $role = Auth::user()->accesslevel;
-        if($role == 0){
-            if(Auth::user()->is_first_login == 1){
+        if ($role == 0) {
+            if (Auth::user()->is_first_login == 1) {
                 return view('instructor.first_login');
-            }else{
+            } else {
                 return view('admin.dashboard');
             }
-        }elseif($role == 1){
-            if(Auth::user()->is_first_login == 1){
+        } elseif ($role == 1) {
+            if (Auth::user()->is_first_login == 1) {
                 return view('instructor.first_login');
-            }else{
+            } else {
                 return view('instructor.dashboard');
             }
-        }elseif($role == 100){
+        } elseif ($role == 100) {
             return view('super_admin.dashboard');
-        }else{
+        } else {
             return view('adminlte::home');
         }
-        
     }
-    
-    function search($search){
-       $user = \App\User::where('username',$search)->first();
-       event(new SearchEvent($user));
+
+    function search($search)
+    {
+        $user = \App\User::where('username', $search)->first();
+        event(new SearchEvent($user));
     }
-    
-    function view_search(){
+
+    function view_search()
+    {
         return view('search');
     }
-    
-    function default_pass(Request $request){
-            $validate = $request->validate([
-                'password' => 'required|min:6|confirmed'
-            ]);
-            if($validate){
-                $user = \App\User::find($request->idno);
-                $user->is_first_login = 0;
-                $user->password = bcrypt($request->password);
-                $user->update();
-            }
-            Session::flash('success','Welcome to Instructor`s portal');
-            return redirect(route('home'));
+
+    function default_pass(Request $request)
+    {
+        $validate = $request->validate([
+            'password' => 'required|min:6|confirmed'
+        ]);
+        if ($validate) {
+            $user = \App\User::find($request->idno);
+            $user->is_first_login = 0;
+            $user->password = bcrypt($request->password);
+            $user->update();
+        }
+        Session::flash('success', 'Welcome to Instructor`s portal');
+        return redirect(route('home'));
     }
 }

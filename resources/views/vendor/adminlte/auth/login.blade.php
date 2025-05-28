@@ -79,10 +79,12 @@
     </head>
     <body class="hold-transition login-page" style="background:#252525;">
         <div class="container-fluid header">    
-            <div class="col-md-1 pull-left"><img class="image img-responsive logo" src="http://scheduling.local/images/grc.jpg"></div>
-            <div class="col-md-8"><span class="schoolname">Sample University</span> <br> Sample School Address
-                 <br>Manila, Philippines.</div>
-            <div class="col-md-3 sis"><span id="sisname">Scheduling System</span></div>
+            <div class="col-md-1 pull-left"><img class="image img-responsive logo" src="{{ asset('logo/logo.png') }}"></div>
+            <div class="col-md-8"><span class="schoolname">Pangasinan State University</span>
+                <br>
+                <p><b>Domanpot, Asingan, Pangasinan 2439</b></p>
+            </div>
+            <div class="col-md-3 sis"><span id="sisname">Laboratory Scheduling System</span></div>
         </div>
         <div class="login-box">
  
@@ -94,7 +96,7 @@
 
         @if (count($errors) > 0)
             <div class="alert alert-danger">
-                <strong>Whoops!</strong> {{ trans('adminlte_lang::message.someproblems') }}<br><br>
+                <strong>Whoops!</strong> Something went wrong.<br><br>
                 <ul>
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
@@ -104,27 +106,27 @@
         @endif
 
         <div class="login-box-body">
-        <p class="login-box-msg"> {{ trans('adminlte_lang::message.siginsession') }} </p>
+        <p class="login-box-msg"></p>
         <form action="{{ url('/login') }}" method="post">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="form-group has-feedback">
-                <input type="text" class="form-control" placeholder="{{ trans('adminlte_lang::message.email') }}" name="username"/>
+                <input type="text" class="form-control" placeholder="Username" name="username"/>
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="{{ trans('adminlte_lang::message.password') }}" name="password"/>
+                <input type="password" class="form-control" placeholder="Password" name="password"/>
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="row">
                 <div class="col-xs-8">
                     <div class="checkbox icheck">
-                       <!-- <label>
-                            <input type="checkbox" name="remember"> {{ trans('adminlte_lang::message.remember') }}
-                        </label>-->
+                        <label>
+                            <input type="checkbox" name="remember">Remember Me
+                        </label>
                     </div>
                 </div><!-- /.col -->
                 <div class="col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">{{ trans('adminlte_lang::message.buttonsign') }}</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">Login</button>
                 </div><!-- /.col -->
             </div>
         </form>
@@ -149,9 +151,10 @@
                 
             </div>
             <!-- Default to the left -->
-            <strong>Copyright &copy;   <a href="https://www.facebook.com/JheyV09">Lapuz, Jefferson </a>
+            <strong>Copyright &copy;<a href="https://asingan.psu.edu.ph/"><span id="year"></span> Pangasinan State University</a></strong></a>
         </div>  
     <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
         $(function () {
             $('input').iCheck({ 
                 checkboxClass: 'icheckbox_square-blue',

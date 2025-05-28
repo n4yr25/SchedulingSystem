@@ -114,19 +114,27 @@ if(Auth::user()->is_first_login == 1){
 @section('footer-script')
 <script src="{{asset('plugins/select2/select2.css')}}"></script>
 <script>
-    function getsections(level){
-        var array = {};
-        array['level'] = level;
-        array['program_code'] = "{{$program_code}}";
+    function getsections(level) {
+        console.log("getSections triggered with level:", level); // Debug line
+
+        const data = {
+            level: level,
+            program_code: "{{ $program_code }}"
+        };
+
         $.ajax({
             type: "GET",
             url: "/ajax/admin/course_offerings/get_sections",
-            data: array,
-            success: function(data){
-                $('#displaysections').html(data).fadeIn();
+            data: data,
+            success: function(response) {
+                $('#displaysections').html(response).fadeIn();
                 $('#displaysearcourse').fadeIn();
+            },
+            error: function(xhr, status, error) {
+                toastr.error('Error retrieving sections', 'Notification!');
+                console.error('AJAX Error:', xhr.responseText);
             }
-        })
+        });
     }
     
     
@@ -145,8 +153,10 @@ if(Auth::user()->is_first_login == 1){
                 success: function(data){
                     $('#displaycourses').html(data).fadeIn();
                     searchoffering(cy,level,period,section_name)
-                }, error: function(){
-
+                }, 
+                error: function(xhr, status, error){
+                    console.error('AJAX Error:', xhr.responseText);
+                    toastr.error('Something went wrong while searching for courses', 'Notification!');
                 }
             })
         }else{
@@ -166,8 +176,10 @@ if(Auth::user()->is_first_login == 1){
             data: array,
             success: function(data){
                 $('#displayoffered').html(data).fadeIn();
-            }, error: function(){
-                
+            }, 
+            error: function(xhr, status, error){
+                console.error('AJAX Error:', xhr.responseText);
+                toastr.error('Something swent wrong while searching for courses', 'Notification!');
             }
         })
     }

@@ -129,7 +129,7 @@ if(Auth::user()->is_first_login == 1){
                                 <input class="form form-control" value="{{$info->municipality}}" name='municipality' placeholder='Municipality/City' value="{{old('municipality')}}" type="text">
                             </div>
                             <div class="col-sm-6">
-                                <input class="form form-control" name='province' placeholder='Province' value="{{old('province')}}" type="text">
+                                <input class="form form-control" name='province' placeholder='Province' value="{{$info->province}}" type="text">
                             </div>
                         </div>
                         
@@ -162,7 +162,7 @@ if(Auth::user()->is_first_login == 1){
                     </div>
                     <div class="box-body">
                       
-                        <div class="col-sm-4">
+                        {{-- <div class="col-sm-4">
                             <label><b>College</b></label>
                             <select name="department" class="select2 form form-control">
                                 <option value="">Select College</option>
@@ -171,7 +171,7 @@ if(Auth::user()->is_first_login == 1){
                                 <option @if($info->department == "College of Education") selected="selected" @endif value="College of Education">College of Education</option>
                                 <option @if($info->department == "College of Accountancy") selected="selected" @endif value="College of Accountancy">College of Accountancy</option>
                             </select>
-                        </div>
+                        </div> --}}
                         <div class="col-sm-4">
                             <label><b>Department</b></label>
                             <select name="college" class="select2 form form-control">

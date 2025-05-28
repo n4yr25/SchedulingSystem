@@ -9,7 +9,7 @@
             <div class="user-panel">
                 <div class="pull-left image">
                     <img src="http://scheduling.local/images/avatar5.png" class="img-circle" alt="User Imge"  />
-                   <!-- <img src="{{ Gravatar::get($user->email) }}" class="img-circle" alt="User Imge"  />--> 
+                   {{-- <!-- <img src="{{ Gravatar::get($user->email) }}" class="img-circle" alt="User Imge"  />-->  --}}
                 </div>
                 <div class="pull-left info">
                     <p>{{ Auth::user()->name }}</p>

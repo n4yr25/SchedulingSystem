@@ -94,8 +94,8 @@ if(Auth::user()->is_first_login == 1){
                     {{ csrf_field() }}
                     <div class="form-group">
                         <div class="col-sm-3">
-                            <label><b>ID Number</b></label>
-                            <input class="form form-control" name="username" placeholder="ID Number*" value="{{old('instructor_id')}}" type="text">
+                            <label><b>ID Number</b><span style="color:red; margin-left: 2px;">*</span></label>
+                            <input class="form form-control" name="username" placeholder="ID Number" value="{{old('instructor_id')}}" type="text" required>
                         </div>
                         <div class="col-sm-9">
                             <label><b>Email</b></label>
@@ -105,8 +105,8 @@ if(Auth::user()->is_first_login == 1){
                     
                     <div class="form-group">
                         <div class="col-sm-3">
-                            <label><b>Name</b></label>
-                            <input class="form form-control" name='name' placeholder='First Name*' value="{{old('name')}}" type="text">
+                            <label><b>Name</b><span style="color:red; margin-left: 2px;">*</span></label>
+                            <input class="form form-control" name='name' placeholder='First Name*' value="{{old('name')}}" type="text" required>
                         </div>
                         <div class="col-sm-3">
                             <label>&nbsp;</label>
@@ -114,7 +114,7 @@ if(Auth::user()->is_first_login == 1){
                         </div>
                         <div class="col-sm-3">
                             <label>&nbsp;</label>
-                            <input class="form form-control" name='lastname' placeholder='Last Name*' value="{{old('lastname')}}" type="text">
+                            <input class="form form-control" name='lastname' placeholder='Last Name*' value="{{old('lastname')}}" type="text" required>
                         </div>
                         <div class="col-sm-3">
                             <label>&nbsp;</label>
@@ -124,28 +124,28 @@ if(Auth::user()->is_first_login == 1){
                     
                     <div class="form-group">
                         <div class="col-sm-6">
-                            <label><b>Address</b></label>
+                            <label><b>Address</b><span style="color:red; margin-left: 2px;">*</span></label>
                             <input class="form form-control" name='street' placeholder='Street Address' value="{{old('street')}}" type="text">
                         </div>
                         <div class="col-sm-6">
                             <label>&nbsp;</label>
-                            <input class="form form-control" name='barangay' placeholder='Barangay' value="{{old('barangay')}}" type="text">
+                            <input class="form form-control" name='barangay' placeholder='Barangay*' value="{{old('barangay')}}" type="text" required>
                         </div>
                     </div>
                     
                     <div class="form-group">
                         <div class="col-sm-6">
-                            <input class="form form-control" name='municipality' placeholder='Municipality/City' value="{{old('municipality')}}" type="text">
+                            <input class="form form-control" name='municipality' placeholder='Municipality/City*' value="{{old('municipality')}}" type="text" required>
                         </div>
                         <div class="col-sm-6">
-                            <input class="form form-control" name='province' placeholder='Province' value="{{old('province')}}" type="text">
+                            <input class="form form-control" name='province' placeholder='Province*' value="{{old('province')}}" type="text" required>
                         </div>
                     </div>
                         
                     <div class="form-group">
                         <div class="col-sm-4">
-                            <label><b>Gender</b></label>
-                            <select class="select2 form form-control" name='gender' type="text">
+                            <label><b>Gender</b><span style="color:red; margin-left: 2px;">*</span></label>
+                            <select class="select2 form form-control" name='gender' type="text" required>
                                 <option value=''>Select Gender</option>
                                 <option value='Male'>Male</option>
                                 <option value='Female'>Female</option>
@@ -153,14 +153,10 @@ if(Auth::user()->is_first_login == 1){
                         </div>
                 
                         <div class="col-sm-4">
-                            <label><b>Contact Number</b></label>
-                            <input class="form form-control" name='tel_no' placeholder='Telephone Number' value="" type="text">
+                            <label><b>Contact Number</b><span style="color:red; margin-left: 2px;">*</span></label>
+                            <input class="form form-control" name='tel_no' placeholder='Telephone Number' value="" type="text" required>
                         </div>
                 
-                        <div class="col-sm-4">
-                            <label><b>Cellphone Number</b></label>
-                            <input class="form form-control" name='cell_no' placeholder='Cellphone Number' value="" type="text">
-                        </div>
                     </div>
                 </div>
             </div>    
@@ -169,7 +165,7 @@ if(Auth::user()->is_first_login == 1){
                     <h3 class="box-title"><b>Other Information</b></h3>
                 </div>
                 <div class="box-body">
-                    <div class="col-sm-4">
+                    <!-- <div class="col-sm-4">
                         <label><b>College</b></label>
                         <select name="department" class="select2 form form-control">
                             <option value="">Select College</option>
@@ -178,19 +174,19 @@ if(Auth::user()->is_first_login == 1){
                             <option value="College of Education">College of Education</option>
                             <option value="College of Accountancy">College of Accountancy</option>
                         </select>
-                    </div>
+                    </div> -->
                     <div class="col-sm-4">
-                        <label><b>Department</b></label>
-                        <select name="college" class="select2 form form-control">
+                        <label><b>Department</b><span style="color:red; margin-left: 2px;">*</span></label>
+                        <select name="college" class="select2 form form-control" required>
                             <option value="">Select Department</option>
                             @foreach($programs as $program)
-                            <option value="{{$program->program_code}}">{{$program->program_code}}</option>
+                            <option value="{{$program->program_code}}">{{$program->program_name}}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="col-sm-4">
-                        <label><b>Employee Status</b></label>
-                        <select name="employee_type" class="select2 form form-control">
+                        <label><b>Employee Status</b><span style="color:red; margin-left: 2px;">*</span></label>
+                        <select name="employee_type" class="select2 form form-control" required>
                             <option value="">Select Employee Type</option>
                             <option value="Full Time">Full Time</option>
                             <option value="Part Time">Part Time</option>

@@ -4,9 +4,9 @@
     <!-- Logo -->
     <a href="{{ url('/home') }}" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>JEFF</b></span>
+        <span class="logo-mini"><b>PSU - Asingan</b></span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>JEFF</b></span>
+        <span class="logo-lg"><b>PSU - Asingan</b></span>
     </a>
 
     <!-- Header Navbar -->
@@ -57,17 +57,17 @@
                         <!-- Menu Toggle Button -->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <!-- The user image in the navbar-->
-                            <img src="http://scheduling.local/images/avatar5.png" class="user-image" alt="User Image"/>
+                            <img src="{{ asset('/images/avatar5.png') }}" class="user-image" alt="User Image"/>
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
                             <span class="hidden-xs">{{ Auth::user()->name }}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
                             <li class="user-header">
-                                <img src="http://scheduling.local/images/avatar5.png" class="img-circle" alt="User Image" />
+                                <img src="{{ asset('images/avatar5.png') }}" class="img-circle" alt="User Image" />
                                 <p>
                                     {{ Auth::user()->name }}
-                                    <small>{{ trans('adminlte_lang::message.login') }} </small>
+                                    <small>Logged In</small>
                                 </p>
                             </li>
                             <!-- Menu Body -->
@@ -91,7 +91,7 @@
                                     <a href="{{ url('/logout') }}" class="btn btn-default btn-flat"
                                        onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
-                                        {{ trans('adminlte_lang::message.signout') }}
+                                        Sign out
                                     </a>
 
                                     <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
