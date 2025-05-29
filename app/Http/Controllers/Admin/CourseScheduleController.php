@@ -17,7 +17,6 @@ class CourseScheduleController extends Controller
     }
     
     function course_schedule(){
-        
             $programs = \App\academic_programs::distinct()->get(['program_code','program_name']);
             return view('admin.course_schedule.course_schedule',compact('programs'));
         
@@ -27,6 +26,10 @@ class CourseScheduleController extends Controller
             $offering = \App\offerings_infos_table::find($offering_id);
             $curricula = \App\curriculum::find($offering->curriculum_id);
             $inactive = \App\room_schedules::where('is_active',0)->get();
+            // $instructor = "";
+            // $instructor = \App\instructors_infos::join('users','users.id','instructors_infos.instructor_id')
+            //     ->join('room_schedules','room_schedules.instructor','instructors_infos.instructor_id')
+            //     ->where('is_active',1)->get(['users.name','users.lastname']);
             $get_schedule = $this->getSchedule($offering_id);
             $is_complab = \App\curriculum::find($offering->curriculum_id)->is_complab;
             return view('admin.course_schedule.add_schedule',compact('offering','curricula','inactive','offering_id','get_schedule','section_name','is_complab'));
@@ -35,7 +38,8 @@ class CourseScheduleController extends Controller
     
     public static function getSchedule($offering_id){
         $event_array = array();
-        $schedules = \App\room_schedules::where('offering_id',$offering_id)->get();
+        $schedules = \App\room_schedules::where('offering_id',$offering_id)
+            ->join('users','users.id','room_schedules.instructor')->get();
         if(!$schedules->isEmpty()){
             foreach($schedules as $sched){
                 $course_detail = \App\curriculum::join('offerings_infos','offerings_infos.curriculum_id','curricula.id')
@@ -63,7 +67,7 @@ class CourseScheduleController extends Controller
                 }
                 $event_array[] = array(
                     'id' => $sched->id,
-                    'title' => $course_detail->course_code.'<br>'.$sched->room.'<br>'.$course_detail->section_name,
+                    'title' => $course_detail->course_code.'<br>'.$sched->room.'<br>'.$course_detail->section_name.'<br>'.$sched->name.' '.$sched->lastname,
                     'start' => date('Y-m-d', strtotime($day. ' this week')).'T'.$sched->time_starts,
                     'end' => date('Y-m-d', strtotime($day. ' this week')).'T'.$sched->time_end,
                     'color' => $color,
@@ -83,6 +87,7 @@ class CourseScheduleController extends Controller
             $time_start = $request->time_start;
             $time_end = $request->time_end;
             $section_name = $request->section_name;
+            $instructor_id = $request->instructor;
             
             $same_sched = DB::table('offerings_infos')
                     ->join('room_schedules','offerings_infos.id','room_schedules.offering_id')
@@ -98,6 +103,7 @@ class CourseScheduleController extends Controller
                 $new_schedule->time_starts = date('H:i:s',strtotime($time_start));
                 $new_schedule->time_end = date('H:i:s',strtotime($time_end));
                 $new_schedule->room = $request->room;
+                $new_schedule->instructor = $instructor_id;
                 $new_schedule->offering_id = $offering_id;
                 $new_schedule->save();
 

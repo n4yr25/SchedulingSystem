@@ -6,6 +6,7 @@ use App\CtrRoom;
 use App\CtrSection;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\instructors_infos;
 use App\offerings_infos_table;
 use App\room_schedules;
 use Illuminate\Http\Request;
@@ -67,6 +68,9 @@ class CourseScheduleAjax extends Controller
             $start = date("H:i:s", strtotime($time_start));
             $end = date("H:i:s", strtotime($time_end));
 
+            
+          
+
             // Find conflicting room schedules
             $conflict_schedules = room_schedules::join('offerings_infos', 'offerings_infos.id', '=', 'room_schedules.offering_id')
                 ->where('room_schedules.day', $day)
@@ -80,6 +84,10 @@ class CourseScheduleAjax extends Controller
                 })
                 ->get();
 
+            $instructors = instructors_infos::join('users', 'users.id', '=', 'instructors_infos.instructor_id')
+    ->get(['instructors_infos.instructor_id', 'users.name', 'users.lastname']);
+
+
             // Filter available rooms
             if ($conflict_schedules->isNotEmpty()) {
                 $conflicting_rooms = $conflict_schedules->pluck('room')->unique()->toArray();
@@ -90,9 +98,9 @@ class CourseScheduleAjax extends Controller
             } else {
                 $rooms = CtrRoom::where('is_active', 1)->get();
             }
-
+            
             return view('admin.course_schedule.ajax.get_available_rooms', compact(
-                'rooms', 'offering_id', 'day', 'time_start', 'time_end', 'section_name'
+                'rooms', 'offering_id', 'day', 'time_start', 'time_end', 'section_name', 'instructors'
             ))->render();
         }
 

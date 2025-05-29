@@ -24,6 +24,14 @@
             </select>
         </div>
         <div class='form-group'>
+            <label>Instructor</label>
+            <select name="instructor" class='form-control'>
+                @foreach($instructors as $instructor)
+                <option value='{{$instructor->instructor_id}}'>{{$instructor->name}}&nbsp;{{$instructor->lastname}}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class='form-group'>
             <button  type='submit' class='btn btn-flat btn-success btn-block'>Save and Submit</button>
         </div>
         </form>

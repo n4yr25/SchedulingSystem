@@ -16,7 +16,7 @@ if(Auth::user()->is_first_login == 1){
 
 ?>
 @extends($layout)
-
+  
 @section('main-content')
 <section class="content-header">
       <h1><i class="fa  fa-spinner"></i>  
