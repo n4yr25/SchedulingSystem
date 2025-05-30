@@ -206,7 +206,7 @@ $('#calendar').fullCalendar({
     defaultView: 'agendaWeek',
     hiddenDays: [0],
     minTime: '07:00:00',
-    maxTime: '22:00:00',
+    maxTime: '20:00:00',
     header: false,
     //// uncomment this line to hide the all-day slot
     allDaySlot: false,

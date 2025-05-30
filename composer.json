@@ -15,7 +15,9 @@
         "laravel/framework": "*",
         "laravel/helpers": "*",
         "laravel/tinker": "^2.9",
-        "laravel/ui": "^4.6"
+        "laravel/ui": "^4.6",
+        "maatwebsite/excel": "^1.1",
+        "phpoffice/phpspreadsheet": "^4.3"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

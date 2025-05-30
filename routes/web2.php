@@ -36,6 +36,8 @@ Route::get('/admin/course_scheduling/remove_schedule/{schedule_id}/{offering_id}
 Route::get('/admin/course_scheduling/attach_schedule/{schedule_id}/{offering_id}','Admin\CourseScheduleController@attach_schedule');
 Route::get('/admin/course_scheduling/delete_schedule/{schedule_id}/{offering_id}','Admin\CourseScheduleController@delete_schedule');
 
+Route::get('/admin/course_scheduling/export', 'Admin\Ajax\CourseExportAjax@exportCourses');
+
 
 //faculty loading
 Route::get('/admin/faculty_loading','Admin\FacultyLoadingController@faculty_loading');

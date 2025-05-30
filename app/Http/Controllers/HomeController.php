@@ -39,15 +39,15 @@ class HomeController extends Controller
         $role = Auth::user()->accesslevel;
         if ($role == 0) {
             if (Auth::user()->is_first_login == 1) {
-                return view('instructor.first_login');
+                // return view('instructor.first_login');
             } else {
                 return view('admin.dashboard');
             }
         } elseif ($role == 1) {
             if (Auth::user()->is_first_login == 1) {
-                return view('instructor.first_login');
+                // return view('instructor.first_login');
             } else {
-                return view('instructor.dashboard');
+                // return view('instructor.dashboard');
             }
         } elseif ($role == 100) {
             return view('super_admin.dashboard');

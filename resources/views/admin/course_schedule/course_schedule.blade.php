@@ -61,6 +61,7 @@ if(Auth::user()->is_first_login == 1){
                     </div>
                 </div>
                 <div class='col-sm-4'  id='displaysection'><div ></div></div>
+                {{-- @include('admin.course_schedule.preview_schedule') --}}
             </div>
         </div>
     </div>
