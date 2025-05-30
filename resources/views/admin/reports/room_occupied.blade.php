@@ -77,8 +77,10 @@ function searchdata(room){
         data: array,
         success: function(data){
             $('#displaydata').html(data).fadeIn();
-        }, error: function(){
-            toastr.error('Something Went Wrong!','Notification!');
+        }, 
+        error: function(xhr, status, error) {
+            console.error('Export failed:', error);
+           
         }
     })
 }
