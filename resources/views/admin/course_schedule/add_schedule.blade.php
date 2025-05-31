@@ -18,6 +18,7 @@ if(Auth::user()->is_first_login == 1){
 @extends($layout)
 
 @section('main-content')
+
 <link rel="stylesheet" href="{{ asset ('plugins/timepicker/bootstrap-timepicker.min.css')}}">
 <link rel="stylesheet" href="{{ asset ('plugins/fullcalendar/fullcalendar.css')}}">
 <section class="content-header">
@@ -107,6 +108,7 @@ if(Auth::user()->is_first_login == 1){
                                 </select>
                             </div>
                         </div>
+                        
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label>Time Start</label>
@@ -162,13 +164,19 @@ if(Auth::user()->is_first_login == 1){
 <script type="text/javascript" src="{{ asset('/plugins/moment/moment.js') }}"></script>
 <script src="{{asset('plugins/fullcalendar/fullcalendar.js')}}"></script>
 <script>
+// $('.timepicker').timepicker({
+//     showInputs: false,
+// });
 $('.timepicker').timepicker({
     showInputs: false,
+    minuteStep: 60,           // Only allow full-hour increments
+    showMeridian: true,       // AM/PM format
+    disableFocus: true,
 });
 
 $('#time_start').on('change',function(){
     if("{{$is_complab}}" == 1){
-        $('#time_end').val(moment(this.value, "hh:mm TT").add(3, 'hours').format("hh:mm A"));
+        $('#time_end').val(moment(this.value, "hh:mm TT").add(1, 'hours').format("hh:mm A"));
     }
 })
 
@@ -198,6 +206,7 @@ function addschedule(day,time_start,time_end){
     }
 }
 
+console.log(<?php echo "$get_schedule" ?>);
 
 
 $('#calendar').fullCalendar({

@@ -24,26 +24,32 @@ class ReportController extends Controller
         //             ->where('room',$room)->get();
         $curriculum_year = 2025;
         $schedules = \App\room_schedules::join('offerings_infos', 'offerings_infos.id', '=', 'room_schedules.offering_id')
-    ->join('curricula', 'curricula.id', '=', 'offerings_infos.curriculum_id')
-    ->join('users', 'users.id', '=', 'room_schedules.instructor')
-    ->select(
-        'room_schedules.day',
-        'room_schedules.time_starts',
-        'room_schedules.time_end',
-        'room_schedules.room',
-        'curricula.course_code',
-        'curricula.course_name',
-        'users.name',
-        'users.lastname'
-    )
-    ->where('room_schedules.is_active', 1)
-    ->where('room_schedules.room', $room)
-    ->get();
+        ->join('curricula', 'curricula.id', '=', 'offerings_infos.curriculum_id')
+        ->join('users', 'users.id', '=', 'room_schedules.instructor')
+        ->select(
+            'room_schedules.day',
+            'room_schedules.time_starts',
+            'room_schedules.time_end',
+            'room_schedules.room',
+            'curricula.course_code',
+            'curricula.course_name',
+            'curricula.program_code',
+            'users.name',
+            'users.lastname'
+        )
+        ->where('room_schedules.is_active', 1)
+        ->where('room_schedules.room', $room)
+        ->get();
 
         // return $schedules;
 
         $pdf = PDF::loadView('admin.reports.print_room_occupied',compact('schedules','room', 'curriculum_year'));
         $pdf->setPaper('A4','landscape');
         return $pdf->stream("RoomsOccupied.pdf");
+    }
+
+    public function section_load(){
+        $rooms = \App\CtrSection::all();
+        return view('admin.reports.section_load',compact('rooms'));
     }
 }

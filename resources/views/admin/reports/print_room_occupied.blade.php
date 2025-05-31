@@ -102,25 +102,24 @@
 @php
     use Carbon\Carbon;
 
-    $days = ['M', 'T', 'W', 'Th', 'F', 'S'];
+    $days = ['M', 'T', 'W', 'Th', 'F', 'Sa'];
     $timeSlots = [
         '07:00 - 08:00','08:00 - 09:00','09:00 - 10:00','10:00 - 11:00',
-        '11:00 - 12:00','12:00 - 01:00','01:00 - 02:00','02:00 - 03:00',
-        '03:00 - 04:00','04:00 - 05:00','05:00 - 06:00','06:00 - 07:00'
+        '11:00 - 12:00','12:00 - 13:00','13:00 - 14:00','14:00 - 15:00',
+        '15:00 - 16:00','16:00 - 17:00','17:00 - 18:00','18:00 - 19:00'
     ];
 
-    // Convert timeSlots to array of [start, end] Carbon objects
+    // Parse time slots
     $parsedSlots = [];
     foreach ($timeSlots as $slot) {
         [$start, $end] = explode(' - ', $slot);
         $parsedSlots[] = [
-            'label' => $slot,
+            'label' => Carbon::createFromFormat('H:i', $start)->format('h:i A') . ' - ' . Carbon::createFromFormat('H:i', $end)->format('h:i A'),
             'start' => Carbon::createFromFormat('H:i', $start),
             'end' => Carbon::createFromFormat('H:i', $end),
         ];
     }
 
-    // Track already rendered cells to apply rowspan
     $rendered = [];
 @endphp
 
@@ -129,11 +128,9 @@
         <td>{{ $parsedSlots[$i]['label'] }}</td>
         @foreach($days as $day)
             @php
-                // Check if this cell should be skipped due to rowspan
                 if (isset($rendered[$day][$i]) && $rendered[$day][$i]) {
                     continue;
                 }
-
                 $printed = false;
             @endphp
 
@@ -144,19 +141,18 @@
                     $schedStart = Carbon::createFromFormat('H:i:s', $sched->time_starts);
                     $schedEnd = Carbon::createFromFormat('H:i:s', $sched->time_end);
 
-                    // Check if schedule starts in current slot
                     if ($schedStart->eq($parsedSlots[$i]['start'])) {
-                        // Count how many time slots the schedule spans
                         $rowspan = 0;
                         for ($j = $i; $j < count($parsedSlots); $j++) {
                             if ($schedStart < $parsedSlots[$j]['end'] && $schedEnd > $parsedSlots[$j]['start']) {
                                 $rowspan++;
-                                $rendered[$day][$j] = true; // Mark slot as rendered
+                                $rendered[$day][$j] = true;
                             }
                         }
                 @endphp
 
                 <td rowspan="{{ $rowspan }}">
+                    {{ $sched->program_code }} - 
                     {{ $sched->course_code }}<br>
                     {{ $sched->course_name }}<br>
                     {{ $sched->name }} {{ $sched->lastname }}
@@ -175,6 +171,7 @@
         @endforeach
     </tr>
 @endfor
+
 
 
       </tbody>

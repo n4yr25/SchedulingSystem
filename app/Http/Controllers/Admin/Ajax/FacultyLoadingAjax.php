@@ -14,17 +14,22 @@ class FacultyLoadingAjax extends Controller
         $this->middleware('auth');
     }
     
-    function courses_to_load(){
-        if(Request::ajax()){
-            $level = Input::get('level');
-            $instructor = Input::get('instructor');
-            
-            $courses = \App\room_schedules::distinct()->
-                    where('is_active',1)->whereNull('instructor')->get(['offering_id']);
-            
-            return view('admin.faculty_loading.ajax.courses_to_load',compact('level','courses'))->render();
+    public function courses_to_load(Request $request)
+    {
+        if ($request->ajax()) {
+            $level = $request->input('level');
+            $instructor = $request->input('instructor');
+
+            // Fetch distinct offering_ids with is_active = 1 and no instructor assigned
+            $courses = \App\room_schedules::where('is_active', 1)
+                ->whereNull('instructor')
+                ->distinct()
+                ->get(['offering_id']);
+
+            return view('admin.faculty_loading.ajax.courses_to_load', compact('level', 'courses'))->render();
         }
     }
+
     
     function current_load(){
         if(Request::ajax()){

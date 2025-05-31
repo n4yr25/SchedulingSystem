@@ -15,7 +15,6 @@ class FacultyLoadingController extends Controller
     }
     
     function faculty_loading(){
-       
            $instructors = \App\User::where('accesslevel',1)->get();
            return view('admin.faculty_loading.faculty_loading',compact('instructors'));
        

@@ -87,7 +87,8 @@
         <ul class="treeview-menu">
                 <li><a href="/admin/instructor/instructor_reports"><i class="fa fa-circle-o"></i> <span>Instructor Reports</span></a></li>
                 <li><a href="{{url('/admin/reports/rooms_occupied')}}"><i class="fa fa-circle-o"></i> <span>Rooms Occupied</span></a></li>
-                </ul> 
+                <li><a href="{{url('/admin/reports/section_load')}}"><i class="fa fa-circle-o"></i> <span>Section Load</span></a></li>
+        </ul> 
                 </li>
                          
                 

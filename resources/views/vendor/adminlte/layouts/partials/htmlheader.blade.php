@@ -7,6 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link href="{{ asset('/css/all.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('/css/index.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('/plugins/select2/select2.css') }}" rel="stylesheet" type="text/css" />
     <script src="https://js.pusher.com/4.4/pusher.min.js"></script>
     <link rel="stylesheet" href="{{ asset ('plugins/toastr/toastr.css')}}">
