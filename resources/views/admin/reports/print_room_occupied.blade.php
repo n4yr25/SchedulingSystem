@@ -99,32 +99,83 @@
         </tr>
       </thead>
       <tbody>
-        @php
-            $days = ['M', 'W', 'T', 'TH', 'F', 'S'];
-            $timeSlots = [
-                '07:00 - 08:00','08:00 - 09:00','09:00 - 10:00','10:00 - 11:00',
-                '11:00 - 12:00','12:00 - 01:00','01:00 - 02:00','02:00 - 03:00',
-                '03:00 - 04:00','04:00 - 05:00','05:00 - 06:00','06:00 - 07:00'
-            ];
+@php
+    use Carbon\Carbon;
+
+    $days = ['M', 'T', 'W', 'Th', 'F', 'S'];
+    $timeSlots = [
+        '07:00 - 08:00','08:00 - 09:00','09:00 - 10:00','10:00 - 11:00',
+        '11:00 - 12:00','12:00 - 01:00','01:00 - 02:00','02:00 - 03:00',
+        '03:00 - 04:00','04:00 - 05:00','05:00 - 06:00','06:00 - 07:00'
+    ];
+
+    // Convert timeSlots to array of [start, end] Carbon objects
+    $parsedSlots = [];
+    foreach ($timeSlots as $slot) {
+        [$start, $end] = explode(' - ', $slot);
+        $parsedSlots[] = [
+            'label' => $slot,
+            'start' => Carbon::createFromFormat('H:i', $start),
+            'end' => Carbon::createFromFormat('H:i', $end),
+        ];
+    }
+
+    // Track already rendered cells to apply rowspan
+    $rendered = [];
+@endphp
+
+@for ($i = 0; $i < count($parsedSlots); $i++)
+    <tr>
+        <td>{{ $parsedSlots[$i]['label'] }}</td>
+        @foreach($days as $day)
+            @php
+                // Check if this cell should be skipped due to rowspan
+                if (isset($rendered[$day][$i]) && $rendered[$day][$i]) {
+                    continue;
+                }
+
+                $printed = false;
             @endphp
 
-            @foreach($timeSlots as $slot)
-            <tr>
-                <td>{{ $slot }}</td>
-                @foreach($days as $day)
-                   <td>
-                        @foreach ($schedules as $sched)
-                            @if ($sched->day == $day)
-                                {{ $sched->day }}<br />
-                                {{ $sched->course_code }}<br />
-                                {{ $sched->course_name }}<br />
-                                {{ $sched->name }} {{ $sched->lastname }}
-                            @endif
-                        @endforeach
-                   </td>
-                @endforeach
-            </tr>
+            @foreach ($schedules as $sched)
+                @php
+                    if ($sched->day != $day) continue;
+
+                    $schedStart = Carbon::createFromFormat('H:i:s', $sched->time_starts);
+                    $schedEnd = Carbon::createFromFormat('H:i:s', $sched->time_end);
+
+                    // Check if schedule starts in current slot
+                    if ($schedStart->eq($parsedSlots[$i]['start'])) {
+                        // Count how many time slots the schedule spans
+                        $rowspan = 0;
+                        for ($j = $i; $j < count($parsedSlots); $j++) {
+                            if ($schedStart < $parsedSlots[$j]['end'] && $schedEnd > $parsedSlots[$j]['start']) {
+                                $rowspan++;
+                                $rendered[$day][$j] = true; // Mark slot as rendered
+                            }
+                        }
+                @endphp
+
+                <td rowspan="{{ $rowspan }}">
+                    {{ $sched->course_code }}<br>
+                    {{ $sched->course_name }}<br>
+                    {{ $sched->name }} {{ $sched->lastname }}
+                </td>
+
+                @php
+                        $printed = true;
+                        break;
+                    }
+                @endphp
             @endforeach
+
+            @if (!$printed)
+                <td></td>
+            @endif
+        @endforeach
+    </tr>
+@endfor
+
 
       </tbody>
     </table>
