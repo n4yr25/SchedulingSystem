@@ -151,7 +151,7 @@
                 
             </div>
             <!-- Default to the left -->
-            <strong>Copyright &copy;<a href="https://asingan.psu.edu.ph/"><span id="year"></span> Pangasinan State University</a></strong></a>
+            <strong>Copyright &copy;<a href="https://asingan.psu.edu.ph/"><span id="year"></span> Pangasinan State University - Asingan Campus</a></strong></a>
         </div>  
     <script>
         document.getElementById("year").textContent = new Date().getFullYear();

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin\Ajax;
 
+use App\academic_programs;
+use App\CtrRoom;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -151,23 +153,33 @@ class CourseOfferingAjax extends Controller
         return response()->json(['error' => 'Invalid request.'], 400);
     }
     
-    function edit_section(){
-        if(Request::ajax()){
-            $section_id = Input::get('section_id');
+    public function edit_section(Request $request)
+    {
+        if ($request->ajax()) {
+            $sectionId = $request->input('section_id');
             
-            $section = \App\CtrSection::find($section_id);
-            $programs = \App\academic_programs::distinct()->get(['program_code','program_name']);
-            return view('admin.course_offering.ajax.edit_section',compact('section','programs'));
+            $section = CtrSection::find($sectionId);
+            $programs = academic_programs::distinct()->get(['program_code', 'program_name']);
+
+            return view('admin.course_offering.ajax.edit_section', compact('section', 'programs'));
         }
+
+        // Optionally return a 404 or redirect if not an AJAX request
+        abort(404);
     }
     
-    function edit_room(){
-        if(Request::ajax()){
-            $room_id = Input::get('room_id');
-            
-            $room = \App\CtrRoom::find($room_id);
-            $programs = \App\academic_programs::distinct()->get(['program_code','program_name']);
-            return view('admin.course_offering.ajax.edit_room',compact('room','programs'));
+    public function edit_room(Request $request)
+    {
+        if ($request->ajax()) {
+            $roomId = $request->input('room_id');
+
+            $room = CtrRoom::find($roomId);
+            $programs = academic_programs::distinct()->get(['program_code', 'program_name']);
+
+            return view('admin.course_offering.ajax.edit_room', compact('room', 'programs'));
         }
+
+        // Optional: return a 404 error if not an AJAX request
+        abort(404);
     }
 }

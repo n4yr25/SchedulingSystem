@@ -6,6 +6,6 @@
             
             </div>
             <!-- Default to the left -->
-            <strong>Copyright &copy;   <a href="https://www.facebook.com/JheyV09">Lapuz, Jefferson </a> </strong>
+            <strong>Copyright &copy;<a href="https://asingan.psu.edu.ph/">Pangasinan State University - Asingan Campus</strong>
 
         </div>   

@@ -152,7 +152,7 @@
                 @endphp
 
                 <td rowspan="{{ $rowspan }}">
-                    {{ $sched->room }} <br>
+                    Rm. {{ $sched->room }} <br>
                     {{ $sched->program_code }} - 
                     {{ $sched->course_code }}<br>
                     {{ $sched->course_name }}<br>

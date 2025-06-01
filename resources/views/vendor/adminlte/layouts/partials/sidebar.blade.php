@@ -38,7 +38,7 @@
             <li class="header">MENU</li>
             <li class="active"><a href="{{ url('home') }}"><i class='fa fa-home '></i> <span>Home</span></a></li>
             
-        <li><a href="/admin/faculty_loading"><i class='fa  fa-list'></i> <span>Faculty Loading</span></a></li>
+        {{-- <li><a href="/admin/faculty_loading"><i class='fa  fa-list'></i> <span>Faculty Loading</span></a></li> --}}
         
         <li class="treeview">
             <a href="#"><i class="fa fa-gears"></i> <span>Maintenance Management</span>
