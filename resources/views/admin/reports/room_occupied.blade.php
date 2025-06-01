@@ -69,7 +69,6 @@ if(Auth::user()->is_first_login == 1){
 <script src="{{asset('plugins/datatables/dataTables.bootstrap.js')}}"></script>
 <script>
 function searchdata(room){
-    console.log('Searching for room:', room);
     
     var array = {};
     array['room'] = room;

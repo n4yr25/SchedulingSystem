@@ -21,7 +21,7 @@ class ReportAjax extends Controller
         if ($request->ajax()) {
             $room = $request->input('room');
 
-            $schedules = room_schedules::where('is_active', 1)
+            $schedules = \App\room_schedules::where('is_active', 1)
                             ->join('offerings_infos', 'offerings_infos.id', '=', 'room_schedules.offering_id')
                             ->where('room', $room)
                             ->get();
@@ -36,9 +36,8 @@ class ReportAjax extends Controller
     {
         if ($request->ajax()) {
             $section = $request->input('section');
-           
 
-            $schedules = room_schedules::join('offerings_infos', 'offerings_infos.id', '=', 'room_schedules.offering_id')
+            $schedules = \App\room_schedules::join('offerings_infos', 'offerings_infos.id', '=', 'room_schedules.offering_id')
                 ->join('curricula', 'curricula.id', '=', 'offerings_infos.curriculum_id')
                 ->join('ctr_sections', 'ctr_sections.section_name', '=', 'offerings_infos.section_name')
                 ->join('users', 'users.id', '=', 'room_schedules.instructor')

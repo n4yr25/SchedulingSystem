@@ -15,20 +15,28 @@
                         <th>Day</th>
                         <th>Schedule</th>
                         <th>Room</th>
-                        <th>Building</th>
+                        <th>Instructor</th>
+                        <th>Section</th>
+                        {{-- <th>Building</th> --}}
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($schedules as $schedule)
-                    <?php $detail_room = \App\offerings_infos_table::join('room_schedules','room_schedules.offering_id','=','offerings_infos.id')
-                        ->join('ctr_rooms','ctr_rooms.room','=','room_schedules.room')
-                        ->where('room_schedules.id',$schedule->id)->first(); ?>
+                    <?php 
+                        // $detail_room = \App\Models\OfferingsInfo::join('room_schedules','room_schedules.offering_id','=','offerings_infos.id')
+                        // ->join('ctr_rooms','ctr_rooms.room','=','room_schedules.room')
+                        // ->where('room_schedules.id', $schedule->id)
+                        // ->select('ctr_rooms.building') // Select only what you need
+                        // ->first(); 
+                    ?>
                     <tr>
                         <td>{{$loop->iteration}}</td> 
                         <td>{{$schedule->day}}</td>
                         <td>{{date('g:i A',strtotime($schedule->time_starts))}} - {{date('g:i A',strtotime($schedule->time_end))}}</td>
                         <td>{{$schedule->room}}</td>
-                        <td>{{$detail_room->building}}</td>
+                        <td>{{$schedule->lastname}}, {{$schedule->name}}</td>
+                        <td>{{$schedule->section_name}}</td>
+                        {{-- <td>{{$detail_room->building}}</td> --}}
                     </tr>
                     @endforeach
                 </tbody>
