@@ -34,6 +34,7 @@ class ReportController extends Controller
             'curricula.course_code',
             'curricula.course_name',
             'curricula.program_code',
+            'offerings_infos.section_name',
             'users.name',
             'users.lastname'
         )
@@ -49,7 +50,48 @@ class ReportController extends Controller
     }
 
     public function section_load(){
-        $rooms = \App\CtrSection::all();
-        return view('admin.reports.section_load',compact('rooms'));
+        $sections = \App\CtrSection::all();
+        return view('admin.reports.section_load',compact('sections'));
+    }
+
+    function print_section_occupied($room){
+        // $schedules = \App\room_schedules::where('is_active',1)
+        //             ->where('room',$room)->get();
+        $curriculum_year = 2025;
+
+        $section = \App\CtrSection::where('id', $room)->get();
+        $program = $section->first()->program_code;
+        $level = $section->first()->level;
+        $section_name = $section->first()->section_name;
+
+        // return $program.",".$level.",".$section_name;
+            
+           
+        $schedules = \App\room_schedules::join('offerings_infos', 'offerings_infos.id', '=', 'room_schedules.offering_id')
+        ->join('curricula', 'curricula.id', '=', 'offerings_infos.curriculum_id')
+        ->join('ctr_sections', 'ctr_sections.section_name', '=', 'offerings_infos.section_name')
+        ->join('users', 'users.id', '=', 'room_schedules.instructor')
+        ->select(
+            'room_schedules.day',
+            'room_schedules.time_starts',
+            'room_schedules.time_end',
+            'room_schedules.room',
+            'curricula.course_code',
+            'curricula.course_name',
+            'curricula.program_code',
+            'ctr_sections.section_name',
+            'users.name',
+            'users.lastname'
+        )
+        ->where('room_schedules.is_active', 1)
+        ->where('ctr_sections.id', $room)
+        ->where('curricula.program_code', $program)
+        ->get();
+
+        $section = $schedules->first()->section_name;
+      
+        $pdf = PDF::loadView('admin.reports.print_section_occupied',compact('schedules','room', 'curriculum_year', 'section'));
+        $pdf->setPaper('A4','landscape');
+        return $pdf->stream("SectionsOccupied.pdf");
     }
 }

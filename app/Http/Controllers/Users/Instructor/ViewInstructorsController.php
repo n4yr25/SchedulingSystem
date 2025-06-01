@@ -214,12 +214,20 @@ class ViewInstructorsController extends Controller
         
     }
 
-    function edityear(){
-        $curriculum_year = Input::get('curriculum_year');
-        $program_code = Input::get('program_code');
-        $edityear = \App\curriculum::where('program_code',$program_code)->where('curriculum_year',$curriculum_year)->first();
-        return view('admin.curriculum_management.ajax.edityear', compact('edityear','program_code','curriculum_year'));
+    public function edityear(Request $request)
+    {
+        $curriculum_year = $request->input('curriculum_year');
+        $program_code = $request->input('program_code');
 
+        $edityear = \App\Curriculum::where('program_code', $program_code)
+            ->where('curriculum_year', $curriculum_year)
+            ->first();
+
+        return view('admin.curriculum_management.ajax.edityear', compact(
+            'edityear',
+            'program_code',
+            'curriculum_year'
+        ));
     }
     
     function updateyear(){

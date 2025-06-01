@@ -76,7 +76,7 @@
       <tr>
         <td>
           <span style="font-weight: bold">
-            ROOM {{ $room ? $room : '' }}
+            {{ $section ? $section : '' }}
           </span>
           <br />
           <span style="font-weight: bold">
@@ -152,7 +152,6 @@
                 @endphp
 
                 <td rowspan="{{ $rowspan }}">
-                    {{ $sched->section_name }}<br>
                     {{ $sched->program_code }} - 
                     {{ $sched->course_code }}<br>
                     {{ $sched->course_name }}<br>

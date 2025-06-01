@@ -41,10 +41,10 @@ if(Auth::user()->is_first_login == 1){
                 <div class="col-sm-8">
                     <div class="form-group">
                         <label>Sections</label>
-                        <select class="form-control select2" id="room">
+                        <select class="form-control select2" id="section">
                             <option>Please Select</option>
-                            @foreach($rooms as $room)
-                            <option value="{{$room->id}}">{{$room->program_code}}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{{$room->level}}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{{$room->section_name}}</option>
+                            @foreach($sections as $section)
+                            <option value="{{$section->id}}">{{$section->program_code}}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{{$section->level}}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{{$section->section_name}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -52,7 +52,7 @@ if(Auth::user()->is_first_login == 1){
                 <div class="col-sm-4">
                     <div class="form-group">
                         <label>&nbsp</label>
-                        <button onclick="searchdata(room.value)" class="btn-block btn btn-flat btn-primary"><i class="fa fa-search"></i> Search</button>
+                        <button onclick="searchdata(section.value)" class="btn-block btn btn-flat btn-primary"><i class="fa fa-search"></i> Search</button>
                     </div>
                 </div>
             </div>
@@ -68,14 +68,15 @@ if(Auth::user()->is_first_login == 1){
 <script src="{{asset('plugins/datatables/jquery.dataTables.js')}}"></script>
 <script src="{{asset('plugins/datatables/dataTables.bootstrap.js')}}"></script>
 <script>
-function searchdata(room){
+function searchdata(section){
     var array = {};
-    array['room'] = room;
+    array['section'] = section;
     $.ajax({
         type: "GET",
-        url: "/ajax/admin/reports/get_rooms_occupied",
+        url: "/ajax/admin/reports/get_sections_occupied",
         data: array,
         success: function(data){
+            console.log('Search results:', data);
             $('#displaydata').html(data).fadeIn();
         }, 
         error: function(xhr, status, error) {

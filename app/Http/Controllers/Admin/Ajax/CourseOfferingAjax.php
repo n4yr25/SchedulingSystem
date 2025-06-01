@@ -35,13 +35,17 @@ class CourseOfferingAjax extends Controller
         return response()->json(['error' => 'Invalid request'], 400);
     }
     
-    function edit_modal(){
-        if(Request::ajax()){
-            $curriculum_id = Input::get('curriculum_id');
-            $course = \App\curriculum::find($curriculum_id);
-            
-            return view('admin.curriculum_management.edit_curriculum',compact('course'));
+    public function edit_modal(Request $request)
+    {
+        if ($request->ajax()) {
+            $curriculum_id = $request->input('curriculum_id');
+            $course = \App\Curriculum::find($curriculum_id);
+
+            return view('admin.curriculum_management.edit_curriculum', compact('course'));
         }
+
+        // Optional: Handle non-AJAX access
+        return response()->json(['error' => 'Invalid request'], 400);
     }
     
     public function get_courses(Request $request)
@@ -125,20 +129,26 @@ class CourseOfferingAjax extends Controller
 
         return response()->json(['message' => 'Invalid request'], 400);
     }
-    
-    function remove_course_offer(){
-        if(Request::ajax()){
-            
-            $section_name = Input::get('section_name');
-            $curriculum_id = Input::get('curriculum_id');
-           
-            $check_if_exists = \App\offerings_infos_table::
-                    where('curriculum_id',$curriculum_id)->where('section_name',$section_name)
-                    ->first(); 
-            $check_if_exists->delete();
-            return 'Removed Course Offered!';
-           
+
+    public function remove_course_offer(Request $request)
+    {
+        if ($request->ajax()) {
+            $section_name = $request->input('section_name');
+            $curriculum_id = $request->input('curriculum_id');
+
+            $courseOffer = \App\offerings_infos_table::where('curriculum_id', $curriculum_id)
+                ->where('section_name', $section_name)
+                ->first();
+
+            if ($courseOffer) {
+                $courseOffer->delete();
+                return response()->json(['message' => 'Removed Course Offered!']);
+            }
+
+            return response()->json(['error' => 'Course offering not found.'], 404);
         }
+
+        return response()->json(['error' => 'Invalid request.'], 400);
     }
     
     function edit_section(){

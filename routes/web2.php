@@ -86,6 +86,8 @@ Route::get('/admin/reports/print_rooms_occupied/{room}','Admin\ReportController@
 Route::get('/ajax/admin/reports/get_rooms_occupied','Admin\Ajax\ReportAjax@get_room_occupied');
 
 Route::get('/admin/reports/section_load','Admin\ReportController@section_load');
+Route::get('/admin/reports/print_sections_occupied/{room}','Admin\ReportController@print_section_occupied');
+Route::get('/ajax/admin/reports/get_sections_occupied','Admin\Ajax\ReportAjax@get_section_occupied');
 
 Route::get('/add/unit_load',function(){
    $users = \App\User::where('accesslevel',1)->get();
