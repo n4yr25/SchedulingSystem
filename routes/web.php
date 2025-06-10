@@ -61,6 +61,7 @@
     Route::get('/registrar_college/curriculum_management/edit_faculty_loading/{idno}/{type_of_period}', 'RegistrarCollege\CurriculumManagement\FacultyLoadingController@edit_faculty_loading');
     Route::get('/admin/instructor/edit_faculty_loading', 'RegistrarCollege\CurriculumManagement\FacultyLoadingController@edit_faculty_loading');
     Route::get('/admin/instructor/edit_faculty_loading/{id}', 'Admin\FacultyLoadingController@instructorlist_reports');
+    Route::get('/admin/instructor/print_instructors_occupied/{id}', 'Admin\ReportController@print_instructor_occupied');
 
     //add new user
 

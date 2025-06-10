@@ -45,7 +45,12 @@ $tabular_schedules = \App\room_schedules::distinct()->
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#tab_1" data-toggle="tab">Calendar View</a></li>
                     <li><a href="#tab_2" data-toggle="tab">Tabular View</a></li>
-                    <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
+                    <li class="pull-right">
+                        <div class="box-tools pull-right">
+                            <a href="{{ url('/admin/instructor/print_instructors_occupied', array($instructor)) }}" target="_blank" class="btn btn-flat btn-primary"><i class="fa fa-print"></i> Generate PDF</a>
+                        </div>
+                    </li>
+                    {{-- <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li> --}}
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="tab_1">   

@@ -94,4 +94,28 @@ class ReportController extends Controller
         $pdf->setPaper('A4','landscape');
         return $pdf->stream("SectionsOccupied.pdf");
     }
+
+    function print_instructor_occupied($room){
+        // $schedules = \App\room_schedules::where('is_active',1)
+        //             ->where('room',$room)->get();
+        $curriculum_year = 2025;
+
+        $section = \App\CtrSection::where('id', $room)->get();
+        $program = $section->first()->program_code;
+        $level = $section->first()->level;
+        $section_name = $section->first()->section_name;
+
+        // return $program.",".$level.",".$section_name;
+            
+           
+        $schedules = \App\room_schedules::distinct()->where('is_active',1)
+                    ->where('instructor',$room)
+                    ->get();
+
+        $section = $schedules->first()->section_name;
+      
+        $pdf = PDF::loadView('admin.reports.print_section_occupied',compact('schedules','room', 'curriculum_year', 'section'));
+        $pdf->setPaper('A4','landscape');
+        return $pdf->stream("SectionsOccupied.pdf");
+    }
 }
