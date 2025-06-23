@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 31, 2025 at 08:14 PM
+-- Generation Time: Jun 23, 2025 at 04:15 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -45,13 +45,13 @@ CREATE TABLE `academic_programs` (
 --
 
 INSERT INTO `academic_programs` (`id`, `academic_type`, `department`, `program_code`, `program_name`, `level`, `strand`, `strand_name`, `created_at`, `updated_at`) VALUES
-(1, 'College', ' ', 'BSIT', 'Bachelor of Science in Information Technology', NULL, NULL, NULL, '2025-05-31 09:03:09', '2025-05-31 09:03:09'),
-(2, 'College', ' ', 'BSCS', 'Bachelor of Science in Computer Science', NULL, NULL, NULL, '2025-05-31 09:03:09', '2025-05-31 09:03:09'),
-(3, 'College', ' ', 'BSCE', 'Bachelor of Science in Civil Engineering', NULL, NULL, NULL, '2025-05-31 09:03:09', '2025-05-31 09:03:09'),
-(4, 'College', ' ', 'BSME', 'Bachelor of Science in Mechanical Engineering', NULL, NULL, NULL, '2025-05-31 09:03:09', '2025-05-31 09:03:09'),
-(5, 'College', ' ', 'BSEE', 'Bachelor of Science in Electrical Engineering', NULL, NULL, NULL, '2025-05-31 09:03:09', '2025-05-31 09:03:09'),
-(6, 'College', ' ', 'BSED', 'Bachelor in Secondary Education', NULL, NULL, NULL, '2025-05-31 09:03:09', '2025-05-31 09:03:09'),
-(7, 'College', ' ', 'BSCPE', 'Bachelor of Science in Computer Engineering', NULL, NULL, NULL, '2025-05-31 09:03:09', '2025-05-31 09:03:09');
+(1, 'College', ' ', 'BSIT', 'Bachelor of Science in Information Technology', NULL, NULL, NULL, '2025-06-01 03:08:10', '2025-06-01 03:08:10'),
+(2, 'College', ' ', 'BSCS', 'Bachelor of Science in Computer Science', NULL, NULL, NULL, '2025-06-01 03:08:10', '2025-06-01 03:08:10'),
+(3, 'College', ' ', 'BSCE', 'Bachelor of Science in Civil Engineering', NULL, NULL, NULL, '2025-06-01 03:08:10', '2025-06-01 03:08:10'),
+(4, 'College', ' ', 'BSME', 'Bachelor of Science in Mechanical Engineering', NULL, NULL, NULL, '2025-06-01 03:08:10', '2025-06-01 03:08:10'),
+(5, 'College', ' ', 'BSEE', 'Bachelor of Science in Electrical Engineering', NULL, NULL, NULL, '2025-06-01 03:08:10', '2025-06-01 03:08:10'),
+(6, 'College', ' ', 'BSED', 'Bachelor in Secondary Education', NULL, NULL, NULL, '2025-06-01 03:08:10', '2025-06-01 03:08:10'),
+(7, 'College', ' ', 'BSCPE', 'Bachelor of Science in Computer Engineering', NULL, NULL, NULL, '2025-06-01 03:08:10', '2025-06-01 03:08:10');
 
 -- --------------------------------------------------------
 
@@ -74,8 +74,11 @@ CREATE TABLE `ctr_rooms` (
 --
 
 INSERT INTO `ctr_rooms` (`id`, `room`, `building`, `description`, `is_active`, `created_at`, `updated_at`) VALUES
-(1, '302', 'IT Building', NULL, 1, '2025-05-31 09:03:09', '2025-05-31 09:03:09'),
-(2, '301', 'IT Building', NULL, 1, '2025-05-31 09:03:09', '2025-05-31 09:03:09');
+(1, '302', 'IT Building', 'First Floor', 1, '2025-06-01 03:08:10', '2025-06-01 05:42:44'),
+(2, '301', 'IT Building', NULL, 1, '2025-06-01 03:08:10', '2025-06-01 03:08:10'),
+(3, '303', 'IT Building', NULL, 1, '2025-06-01 03:10:22', '2025-06-01 03:10:22'),
+(4, '304', 'IT Building', NULL, 1, '2025-06-01 03:32:57', '2025-06-01 03:32:57'),
+(5, '305', 'IT Building', NULL, 1, '2025-06-01 03:33:03', '2025-06-01 05:43:00');
 
 -- --------------------------------------------------------
 
@@ -98,14 +101,15 @@ CREATE TABLE `ctr_sections` (
 --
 
 INSERT INTO `ctr_sections` (`id`, `program_code`, `level`, `section_name`, `is_active`, `created_at`, `updated_at`) VALUES
-(1, 'BSIT', '1st Year', 'Block A', 1, '2025-05-31 09:03:09', '2025-05-31 09:03:09'),
-(2, 'BSIT', '1st Year', 'Bock B', 1, '2025-05-31 09:03:09', '2025-05-31 09:03:09'),
-(3, 'BSIT', '2nd Year', 'Block A', 1, '2025-05-31 09:03:09', '2025-05-31 09:03:09'),
-(4, 'BSIT', '2nd Year', 'Block B', 1, '2025-05-31 09:03:09', '2025-05-31 09:03:09'),
-(5, 'BSIT', '3rd Year', 'Block A', 1, '2025-05-31 09:03:09', '2025-05-31 09:03:09'),
-(6, 'BSIT', '3rd Year', 'Block B', 1, '2025-05-31 09:03:09', '2025-05-31 09:03:09'),
-(7, 'BSIT', '4th Year', 'Block A', 1, '2025-05-31 09:03:09', '2025-05-31 09:03:09'),
-(8, 'BSIT', '4th Year', 'Block B', 1, '2025-05-31 09:03:09', '2025-05-31 09:03:09');
+(1, 'BSIT', '1st Year', 'Block A', 1, '2025-06-01 03:08:10', '2025-06-01 03:08:10'),
+(2, 'BSIT', '1st Year', 'Block B', 1, '2025-06-01 03:08:10', '2025-06-01 05:36:08'),
+(3, 'BSIT', '2nd Year', 'Block A', 1, '2025-06-01 03:08:10', '2025-06-01 03:08:10'),
+(4, 'BSIT', '2nd Year', 'Block B', 1, '2025-06-01 03:08:10', '2025-06-01 03:08:10'),
+(5, 'BSIT', '3rd Year', 'Block A', 1, '2025-06-01 03:08:10', '2025-06-01 03:08:10'),
+(6, 'BSIT', '3rd Year', 'Block B', 1, '2025-06-01 03:08:10', '2025-06-01 03:08:10'),
+(7, 'BSIT', '4th Year', 'Block A', 1, '2025-06-01 03:08:10', '2025-06-01 03:08:10'),
+(8, 'BSIT', '4th Year', 'Block B', 1, '2025-06-01 03:08:10', '2025-06-01 05:32:12'),
+(9, 'BSCS', '1st Year', 'BSCS - Block - A', 1, '2025-06-01 05:36:55', '2025-06-01 05:36:55');
 
 -- --------------------------------------------------------
 
@@ -139,12 +143,12 @@ CREATE TABLE `curricula` (
 --
 
 INSERT INTO `curricula` (`id`, `curriculum_year`, `program_code`, `program_name`, `control_code`, `course_code`, `course_name`, `lec`, `lab`, `units`, `hours`, `level`, `period`, `srf`, `percent_tuition`, `is_complab`, `created_at`, `updated_at`) VALUES
-(1, '2025', 'BSIT', 'Bachelor of Science in Information Technology', 'CC101_IT', 'CC101_IT', 'Introduction to Computing', 3.00, 3.00, 3.00, NULL, '1st Year', '1st Semester', 0.00, 100, 1, '2025-05-31 09:03:09', '2025-05-31 09:03:09'),
-(2, '2025', 'BSIT', 'Bachelor of Science in Information Technology', 'CC102_IT', 'CC102_IT', 'Fundamentals of Programming', 3.00, 3.00, 3.00, NULL, '1st Year', '1st Semester', 0.00, 100, 1, '2025-05-31 09:03:09', '2025-05-31 09:03:09'),
-(3, '2025', 'BSIT', 'Bachelor of Science in Information Technology', 'GE5', 'GE5', 'The Contemporary World', 3.00, 3.00, 3.00, NULL, '1st Year', '1st Semester', 0.00, 100, 1, '2025-05-31 09:03:09', '2025-05-31 09:03:09'),
-(4, '2025', 'BSIT', 'Bachelor of Science in Information Technology', 'GE6', 'GE6', 'Science, Technology and Society', 3.00, 3.00, 3.00, NULL, '1st Year', '1st Semester', 0.00, 100, 1, '2025-05-31 09:03:09', '2025-05-31 09:03:09'),
-(5, '2025', 'BSIT', 'Bachelor of Science in Information Technology', 'GE7', 'GE7', 'Mathematics in the Modern World', 3.00, 3.00, 3.00, NULL, '1st Year', '1st Semester', 0.00, 100, 1, '2025-05-31 09:03:09', '2025-05-31 09:03:09'),
-(6, '2025', 'BSIT', 'Bachelor of Science in Information Technology', 'PE1', 'PE1', 'Physical Activity Towards Health and Fitness 1', 3.00, 3.00, 3.00, NULL, '1st Year', '1st Semester', 0.00, 100, 1, '2025-05-31 09:03:09', '2025-05-31 09:03:09');
+(1, '2025', 'BSIT', 'Bachelor of Science in Information Technology', 'CC101_IT', 'CC101_IT', 'Introduction to Computing', 3.00, 3.00, 3.00, NULL, '1st Year', '1st Semester', 0.00, 100, 1, '2025-06-01 03:08:10', '2025-06-01 03:08:10'),
+(2, '2025', 'BSIT', 'Bachelor of Science in Information Technology', 'CC102_IT', 'CC102_IT', 'Fundamentals of Programming', 3.00, 3.00, 3.00, NULL, '1st Year', '1st Semester', 0.00, 100, 1, '2025-06-01 03:08:10', '2025-06-01 03:08:10'),
+(3, '2025', 'BSIT', 'Bachelor of Science in Information Technology', 'GE5', 'GE5', 'The Contemporary World', 3.00, 3.00, 3.00, NULL, '1st Year', '1st Semester', 0.00, 100, 1, '2025-06-01 03:08:10', '2025-06-01 03:08:10'),
+(4, '2025', 'BSIT', 'Bachelor of Science in Information Technology', 'GE6', 'GE6', 'Science, Technology and Society', 3.00, 3.00, 3.00, NULL, '1st Year', '1st Semester', 0.00, 100, 1, '2025-06-01 03:08:10', '2025-06-01 03:08:10'),
+(5, '2025', 'BSIT', 'Bachelor of Science in Information Technology', 'GE7', 'GE7', 'Mathematics in the Modern World', 3.00, 3.00, 3.00, NULL, '1st Year', '1st Semester', 0.00, 100, 1, '2025-06-01 03:08:10', '2025-06-01 03:08:10'),
+(6, '2025', 'BSIT', 'Bachelor of Science in Information Technology', 'PE1', 'PE1', 'Physical Activity Towards Health and Fitness 1', 3.00, 3.00, 3.00, NULL, '1st Year', '1st Semester', 0.00, 100, 1, '2025-06-01 03:08:10', '2025-06-01 03:08:10');
 
 -- --------------------------------------------------------
 
@@ -228,7 +232,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (8, '2019_02_03_100032_create_ctr_rooms_table', 1),
 (9, '2019_02_06_064213_create_instructors_infos_table', 1),
 (10, '2019_02_16_135143_create_load_notifications_table', 1),
-(11, '2019_03_09_115124_create_units_loads_table', 1);
+(11, '2019_03_09_115124_create_units_loads_table', 1),
+(12, '2025_06_16_092731_create_signatories_table', 2);
 
 -- --------------------------------------------------------
 
@@ -252,18 +257,13 @@ CREATE TABLE `offerings_infos` (
 --
 
 INSERT INTO `offerings_infos` (`id`, `course_type`, `curriculum_id`, `description`, `section_name`, `level`, `created_at`, `updated_at`) VALUES
-(1, NULL, 1, NULL, 'Block A', '1st Year', '2025-05-31 09:11:25', '2025-05-31 09:11:25'),
-(2, NULL, 3, NULL, 'Block A', '1st Year', '2025-05-31 09:11:26', '2025-05-31 09:11:26'),
-(3, NULL, 2, NULL, 'Block A', '1st Year', '2025-05-31 09:11:27', '2025-05-31 09:11:27'),
-(4, NULL, 4, NULL, 'Block A', '1st Year', '2025-05-31 09:11:28', '2025-05-31 09:11:28'),
-(5, NULL, 5, NULL, 'Block A', '1st Year', '2025-05-31 09:11:29', '2025-05-31 09:11:29'),
-(6, NULL, 6, NULL, 'Block A', '1st Year', '2025-05-31 09:11:30', '2025-05-31 09:11:30'),
-(7, NULL, 1, NULL, 'Bock B', '1st Year', '2025-05-31 09:11:56', '2025-05-31 09:11:56'),
-(8, NULL, 2, NULL, 'Bock B', '1st Year', '2025-05-31 09:11:57', '2025-05-31 09:11:57'),
-(9, NULL, 3, NULL, 'Bock B', '1st Year', '2025-05-31 09:11:58', '2025-05-31 09:11:58'),
-(10, NULL, 4, NULL, 'Bock B', '1st Year', '2025-05-31 09:11:58', '2025-05-31 09:11:58'),
-(11, NULL, 5, NULL, 'Bock B', '1st Year', '2025-05-31 09:11:59', '2025-05-31 09:11:59'),
-(12, NULL, 6, NULL, 'Bock B', '1st Year', '2025-05-31 09:11:59', '2025-05-31 09:11:59');
+(1, NULL, 1, NULL, 'Block A', '1st Year', '2025-06-01 03:11:03', '2025-06-01 03:11:03'),
+(2, NULL, 2, NULL, 'Block A', '1st Year', '2025-06-01 03:11:04', '2025-06-01 03:11:04'),
+(3, NULL, 3, NULL, 'Block A', '1st Year', '2025-06-01 03:11:05', '2025-06-01 03:11:05'),
+(4, NULL, 4, NULL, 'Block A', '1st Year', '2025-06-01 03:11:06', '2025-06-01 03:11:06'),
+(5, NULL, 5, NULL, 'Block A', '1st Year', '2025-06-01 03:11:07', '2025-06-01 03:11:07'),
+(6, NULL, 1, NULL, 'Block B', '1st Year', '2025-06-01 03:11:40', '2025-06-01 03:11:40'),
+(7, NULL, 2, NULL, 'Block B', '1st Year', '2025-06-01 03:11:41', '2025-06-01 03:11:41');
 
 -- --------------------------------------------------------
 
@@ -302,14 +302,24 @@ CREATE TABLE `room_schedules` (
 --
 
 INSERT INTO `room_schedules` (`id`, `day`, `time_starts`, `time_end`, `room`, `offering_id`, `instructor`, `is_active`, `created_at`, `updated_at`, `is_loaded`) VALUES
-(1, 'M', '07:00:00', '09:00:00', '301', 1, 3, 1, '2025-05-31 09:14:13', '2025-05-31 09:14:13', 0),
-(2, 'W', '08:00:00', '09:00:00', '302', 1, 3, 1, '2025-05-31 09:15:14', '2025-05-31 09:15:14', 0),
-(4, 'M', '07:00:00', '08:00:00', '302', 7, 5, 1, '2025-05-31 09:18:43', '2025-05-31 09:18:43', 0),
-(5, 'Th', '10:00:00', '12:00:00', '302', 7, 5, 1, '2025-05-31 09:19:08', '2025-05-31 09:19:27', 0),
-(6, 'F', '13:00:00', '15:00:00', '302', 7, 5, 1, '2025-05-31 09:20:03', '2025-05-31 09:20:03', 0),
-(7, 'T', '08:00:00', '09:00:00', '302', 8, 3, 1, '2025-05-31 09:21:24', '2025-05-31 09:21:24', 0),
-(8, 'W', '13:00:00', '17:00:00', '302', 8, 3, 1, '2025-05-31 09:21:42', '2025-05-31 09:21:42', 0),
-(9, 'F', '14:00:00', '17:00:00', '301', 8, 3, 1, '2025-05-31 09:24:30', '2025-05-31 09:24:30', 0);
+(1, 'M', '07:00:00', '10:00:00', '301', 6, 4, 1, '2025-06-01 03:12:13', '2025-06-01 03:12:13', 0),
+(2, 'T', '07:00:00', '09:00:00', '302', 6, 4, 1, '2025-06-01 03:12:43', '2025-06-01 03:12:43', 0),
+(3, 'F', '08:00:00', '10:00:00', '301', 1, 6, 1, '2025-06-01 05:51:49', '2025-06-01 05:51:49', 0),
+(4, 'W', '14:00:00', '05:00:00', '301', 1, 6, 1, '2025-06-01 05:52:10', '2025-06-01 05:52:10', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `signatories`
+--
+
+CREATE TABLE `signatories` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `fullname` varchar(255) NOT NULL,
+  `position` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -436,6 +446,12 @@ ALTER TABLE `room_schedules`
   ADD KEY `room_schedules_instructor_foreign` (`instructor`);
 
 --
+-- Indexes for table `signatories`
+--
+ALTER TABLE `signatories`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `units_loads`
 --
 ALTER TABLE `units_loads`
@@ -463,13 +479,13 @@ ALTER TABLE `academic_programs`
 -- AUTO_INCREMENT for table `ctr_rooms`
 --
 ALTER TABLE `ctr_rooms`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `ctr_sections`
 --
 ALTER TABLE `ctr_sections`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `curricula`
@@ -493,19 +509,25 @@ ALTER TABLE `load_notifications`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `offerings_infos`
 --
 ALTER TABLE `offerings_infos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `room_schedules`
 --
 ALTER TABLE `room_schedules`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `signatories`
+--
+ALTER TABLE `signatories`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `units_loads`
