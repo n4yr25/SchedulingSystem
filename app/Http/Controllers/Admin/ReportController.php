@@ -98,7 +98,7 @@ class ReportController extends Controller
     function print_instructor_occupied($room){
         // $schedules = \App\room_schedules::where('is_active',1)
         //             ->where('room',$room)->get();
-        $curriculum_year = 2025;
+      
 
         $section = \App\CtrSection::where('id', $room)->get();
         $program = $section->first()->program_code;
@@ -108,13 +108,21 @@ class ReportController extends Controller
         // return $program.",".$level.",".$section_name;
             
            
-        $schedules = \App\room_schedules::distinct()->where('is_active',1)
+        $schedules = \App\room_schedules::join('offerings_infos', 'offerings_infos.id', '=', 'room_schedules.offering_id')
+                    ->join('curricula', 'curricula.id', '=', 'offerings_infos.curriculum_id')
+                    ->join('users', 'users.id', '=', 'room_schedules.instructor')
+                    ->distinct()->where('is_active',1)
                     ->where('instructor',$room)
                     ->get();
 
         $section = $schedules->first()->section_name;
+        $semester = $schedules->first()->period;
+        $curriculum_year = $schedules->first()->curriculum_year;
+        $faculty = $schedules->first()->name . " " . $schedules->first()->lastname;
+
+        // return $schedules;
       
-        $pdf = PDF::loadView('admin.reports.print_section_occupied',compact('schedules','room', 'curriculum_year', 'section'));
+        $pdf = PDF::loadView('admin.reports.print_instructor_occupied',compact('schedules','room', 'curriculum_year', 'section', 'semester', 'faculty'));
         $pdf->setPaper('A4','landscape');
         return $pdf->stream("SectionsOccupied.pdf");
     }

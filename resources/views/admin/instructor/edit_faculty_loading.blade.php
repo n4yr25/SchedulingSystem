@@ -50,6 +50,12 @@ $tabular_schedules = \App\room_schedules::distinct()->
                             <a href="{{ url('/admin/instructor/print_instructors_occupied', array($instructor)) }}" target="_blank" class="btn btn-flat btn-primary"><i class="fa fa-print"></i> Generate PDF</a>
                         </div>
                     </li>
+                     <li class="pull-right">
+                        <div class="box-tools pull-right">
+                            {{-- <a href="{{ url('#') }}" target="_blank" class="btn btn-flat btn-primary"> --}}
+                            <button id="signatories" class="btn btn-flat btn-primary"><i class="fa fa-user"></i> Signatories</button>
+                        </div>
+                    </li>
                     {{-- <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li> --}}
                 </ul>
                 <div class="tab-content">
@@ -115,8 +121,11 @@ $tabular_schedules = \App\room_schedules::distinct()->
     </div>
 </div>
 
-<div id="displaymodal">
-
+<div id="myModal" class="modal fade" role="dialog">
+    asdf
+    <div id='displayedit'>
+        asdf
+    </div>
 </div>
 @endsection
 
@@ -127,6 +136,19 @@ $tabular_schedules = \App\room_schedules::distinct()->
 <script src="{{asset('plugins/datatables/jquery.dataTables.js')}}"></script>
 <script src="{{asset('plugins/datatables/dataTables.bootstrap.js')}}"></script>
 <script>
+
+$('#signatories').on('click', function() {
+    console.log('Signatories button clicked');
+    
+    $.ajax({
+        type: "GET",
+        url: "/ajax/admin/reports/signatories",
+        success: function(data) {
+            $('#displayedit').html(data).fadeIn();
+            $('#myModal').modal('show');
+        }
+    });
+});
 
 $('#calendar').fullCalendar({
 header: false,

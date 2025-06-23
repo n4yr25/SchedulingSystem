@@ -75,12 +75,15 @@
     <table class="header-table">
       <tr>
         <td>
-          <span style="font-weight: bold">
+          {{-- <span style="font-weight: bold">
             ROOM {{ $room ? $room : '' }}
           </span>
-          <br />
+          <br /> --}}
           <span style="font-weight: bold">
-            A.Y. {{ $curriculum_year }} - {{ $curriculum_year + 1 }}
+            {{ $semester ? $semester : '' }}, 
+            {{ $curriculum_year }} - {{ $curriculum_year + 1 }} / Summer 20__. Asingan Campus
+            </br>
+            Name of Faculty: {{ $faculty ? strtoupper($faculty) : '' }}
           </span>
         </td>
       </tr>
@@ -152,11 +155,11 @@
                 @endphp
 
                 <td rowspan="{{ $rowspan }}">
-                    {{ $sched->section_name }}<br>
+                    RM. {{ $sched->room }}<br>
                     {{ $sched->program_code }} - 
                     {{ $sched->course_code }}<br>
-                    {{ $sched->course_name }}<br>
-                    {{ $sched->name }} {{ $sched->lastname }}
+                    {{ $sched->section_name }}<br>
+                    {{ $sched->level }}
                 </td>
 
                 @php
