@@ -90,6 +90,10 @@ Route::get('/admin/reports/print_sections_occupied/{room}','Admin\ReportControll
 Route::get('/ajax/admin/reports/get_sections_occupied','Admin\Ajax\ReportAjax@get_section_occupied');
 
 Route::get('/ajax/admin/reports/signatories', 'Admin\Ajax\ReportAjax@view_signatories');
+Route::post('/ajax/admin/reports/update_preparedby', 'Admin\SignatoriesController@updatepreparedby');
+Route::post('/ajax/admin/reports/update_recommendingapproval', 'Admin\SignatoriesController@updaterecommendingapproval');
+Route::post('/ajax/admin/reports/update_approved', 'Admin\SignatoriesController@updateapproved');
+Route::post('/ajax/admin/reports/update_conforme', 'Admin\SignatoriesController@updateconforme');
 
 Route::get('/add/unit_load',function(){
    $users = \App\User::where('accesslevel',1)->get();

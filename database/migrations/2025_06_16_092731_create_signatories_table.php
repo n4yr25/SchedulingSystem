@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('fullname');
             $table->string('position');
+            $table->integer('role');
             $table->timestamps();
         });
     }

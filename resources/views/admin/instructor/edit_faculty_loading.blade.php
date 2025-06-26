@@ -124,7 +124,6 @@ $tabular_schedules = \App\room_schedules::distinct()->
 <div id="myModal" class="modal fade" role="dialog">
     asdf
     <div id='displayedit'>
-        asdf
     </div>
 </div>
 @endsection

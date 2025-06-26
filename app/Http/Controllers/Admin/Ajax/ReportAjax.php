@@ -53,12 +53,9 @@ class ReportAjax extends Controller
 
     public function view_signatories(Request $request)
     {
-        // return "yown";
         if ($request->ajax()) {
             $signatories = \App\Signatories::all();
             return view('admin.reports.ajax.manage_signatories');
         }
-
-        // return response()->json(['error' => 'Invalid request'], 400);
     }
 }
