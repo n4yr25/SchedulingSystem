@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('signatories', function (Blueprint $table) {
             $table->id();
             $table->string('fullname');
-            $table->string('position');
+    $table->string('position');
             $table->integer('role');
             $table->timestamps();
         });

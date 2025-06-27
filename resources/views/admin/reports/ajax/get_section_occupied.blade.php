@@ -3,6 +3,7 @@
     <div class="box-header">
         <h5 class="box-title">Search Results</h5>
         <div class="box-tools pull-right">
+            <button id="signatories" class="btn btn-flat btn-primary"><i class="fa fa-user"></i> Signatories</button>
             <a href="{{url('/admin/reports/print_sections_occupied',array($section))}}" target="_blank" class="btn btn-flat btn-primary"><i class="fa fa-print"></i> Generate PDF</a>
         </div>
     </div>
@@ -56,3 +57,25 @@
     </div>
 </div>
 @endif
+
+<div id="myModal" class="modal fade" role="dialog">
+    asdf
+    <div id='displayedit'>
+    </div>
+</div>
+
+<script>
+    $('#signatories').on('click', function() {
+        console.log('Signatories button clicked');
+        
+        $.ajax({
+            type: "GET",
+            url: "/ajax/admin/reports/signatories",
+            success: function(data) {
+                $('#displayedit').html(data).fadeIn();
+                $('#myModal').modal('show');
+            }
+        });
+    });
+
+</script>
