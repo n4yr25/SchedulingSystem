@@ -76,11 +76,10 @@
       <tr>
         <td>
           <span style="font-weight: bold">
+            {{ $semester ? $semester : '' }}, 
+            {{ $curriculum_year }} - {{ $curriculum_year + 1 }} / Summer 20__. Asingan Campus
+            </br>
             {{ $section ? $section : '' }}
-          </span>
-          <br />
-          <span style="font-weight: bold">
-            A.Y. {{ $curriculum_year }} - {{ $curriculum_year + 1 }}
           </span>
         </td>
       </tr>
