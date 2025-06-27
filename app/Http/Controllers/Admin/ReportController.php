@@ -42,9 +42,26 @@ class ReportController extends Controller
         ->where('room_schedules.room', $room)
         ->get();
 
+        $prepby = \App\Signatories::select('fullname', 'position')
+            ->where('role', 1)
+            ->latest('created_at')
+            ->first();
+        $rec_approval = \App\Signatories::select('fullname', 'position')
+            ->where('role', 2)
+            ->latest('created_at')
+            ->first();
+        $approved = \App\Signatories::select('fullname', 'position')
+            ->where('role', 3)
+            ->latest('created_at')
+            ->first();
+        $conforme = \App\Signatories::select('fullname', 'position')
+            ->where('role', 4)
+            ->latest('created_at')
+            ->first();  
+
         // return $schedules;
 
-        $pdf = PDF::loadView('admin.reports.print_room_occupied',compact('schedules','room', 'curriculum_year'));
+        $pdf = PDF::loadView('admin.reports.print_room_occupied',compact('schedules','room', 'curriculum_year', 'prepby', 'rec_approval', 'approved', 'conforme'));
         $pdf->setPaper('A4','landscape');
         return $pdf->stream("RoomsOccupied.pdf");
     }
@@ -89,8 +106,25 @@ class ReportController extends Controller
         ->get();
 
         $section = $schedules->first()->section_name;
+
+        $prepby = \App\Signatories::select('fullname', 'position')
+            ->where('role', 1)
+            ->latest('created_at')
+            ->first();
+        $rec_approval = \App\Signatories::select('fullname', 'position')
+            ->where('role', 2)
+            ->latest('created_at')
+            ->first();
+        $approved = \App\Signatories::select('fullname', 'position')
+            ->where('role', 3)
+            ->latest('created_at')
+            ->first();
+        $conforme = \App\Signatories::select('fullname', 'position')
+            ->where('role', 4)
+            ->latest('created_at')
+            ->first();  
       
-        $pdf = PDF::loadView('admin.reports.print_section_occupied',compact('schedules','room', 'curriculum_year', 'section'));
+        $pdf = PDF::loadView('admin.reports.print_section_occupied',compact('schedules','room', 'curriculum_year', 'section', 'prepby', 'rec_approval', 'approved', 'conforme'));
         $pdf->setPaper('A4','landscape');
         return $pdf->stream("SectionsOccupied.pdf");
     }
