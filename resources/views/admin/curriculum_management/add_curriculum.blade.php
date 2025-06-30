@@ -71,6 +71,7 @@ $programs = \App\academic_programs::distinct()->orderBy('program_code')->get(arr
                                 <select class="select2 form-control" id="period1" name="period[]">
                                     <option value="1st Semester">1st Semester</option>
                                     <option value="2nd Semester">2nd Semester</option>
+                                    <option value="Mid Year">Mid Year</option>
                                 </select>
                             </td>
                             <td>
@@ -79,7 +80,6 @@ $programs = \App\academic_programs::distinct()->orderBy('program_code')->get(arr
                                     <option value="2nd Year">2nd Year</option>
                                     <option value="3rd Year">3rd Year</option>
                                     <option value="4th Year">4th Year</option>
-                                    <option value="5th Year">5th Year</option>
                                 </select>
                             </td>
                             <td>

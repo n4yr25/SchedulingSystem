@@ -91,6 +91,7 @@ if(Auth::user()->is_first_login == 1){
                                 <select class="form-control" id='period'>
                                     <option>1st Semester</option>
                                     <option>2nd Semester</option>
+                                    <option>Mid Year</option>
                                 </select>
                             </div>
                         </div>
@@ -115,7 +116,6 @@ if(Auth::user()->is_first_login == 1){
 <script src="{{asset('plugins/select2/select2.css')}}"></script>
 <script>
     function getsections(level) {
-        console.log("getSections triggered with level:", level); // Debug line
 
         const data = {
             level: level,
