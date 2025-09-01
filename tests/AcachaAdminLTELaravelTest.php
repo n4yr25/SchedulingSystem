@@ -103,10 +103,10 @@ class AcachaAdminLTELaravelTest extends BrowserKitTest
     public function testLoginRequiredFields()
     {
         $this->visit('/login')
-            ->type('', 'email')
+            ->type('', 'username')
             ->type('', 'password')
             ->press('Sign In')
-            ->see('The email field is required')
+            ->see('The username field is required')
             ->see('The password field is required');
     }
 

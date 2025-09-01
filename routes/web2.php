@@ -95,6 +95,11 @@ Route::post('/ajax/admin/reports/update_recommendingapproval', 'Admin\Signatorie
 Route::post('/ajax/admin/reports/update_approved', 'Admin\SignatoriesController@updateapproved');
 Route::post('/ajax/admin/reports/update_conforme', 'Admin\SignatoriesController@updateconforme');
 
+Route::get('/admin/database_backup/view','Admin\DatabaseBackupController@index');
+Route::get('/admin/database_backup/save','Admin\DatabaseBackupController@save');
+Route::get('/admin/database_backup/download/{id}','Admin\DatabaseBackupController@download');
+Route::delete('/admin/database_backup/delete/{id}','Admin\DatabaseBackupController@destroy');
+
 Route::get('/add/unit_load',function(){
    $users = \App\User::where('accesslevel',1)->get();
     foreach($users as $user){

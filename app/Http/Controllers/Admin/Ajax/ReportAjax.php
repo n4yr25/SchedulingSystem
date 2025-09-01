@@ -54,7 +54,12 @@ class ReportAjax extends Controller
     public function view_signatories(Request $request)
     {
         if ($request->ajax()) {
-            $signatories = \App\Signatories::all();
+            // $signatories = \App\Signatories::all();
+            $prepby = \App\Signatories::select('fullname', 'position')
+                ->where('role', 1)
+                ->latest('date_created')
+                ->first();
+            return $prepby;
             return view('admin.reports.ajax.manage_signatories');
         }
     }
