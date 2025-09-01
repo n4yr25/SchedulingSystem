@@ -54,7 +54,6 @@ class ReportAjax extends Controller
     public function view_signatories(Request $request)
     {
         if ($request->ajax()) {
-<<<<<<< HEAD
             // $signatories = \App\Signatories::all();
             $prepby = \App\Signatories::select('fullname', 'position')
                 ->where('role', 1)
@@ -62,29 +61,6 @@ class ReportAjax extends Controller
                 ->first();
             return $prepby;
             return view('admin.reports.ajax.manage_signatories');
-=======
-            $prepby = \App\Signatories::select('fullname', 'position')
-                ->where('role', 1)
-                ->latest('created_at')
-                ->first();
-
-            $rec_approval = \App\Signatories::select('fullname', 'position')
-                ->where('role', 2)
-                ->latest('created_at')
-                ->first();
-            
-            $approved = \App\Signatories::select('fullname', 'position')
-                ->where('role', 3)
-                ->latest('created_at')
-                ->first();
-
-            $conforme = \App\Signatories::select('fullname', 'position')
-                ->where('role', 4)
-                ->latest('created_at')
-                ->first();  
-
-            return view('admin.reports.ajax.manage_signatories', compact('prepby', 'rec_approval', 'approved', 'conforme'));
->>>>>>> 4bc1cefaa6a093ce3bbc7f2322d55e0cc8f20bae
         }
     }
 }
