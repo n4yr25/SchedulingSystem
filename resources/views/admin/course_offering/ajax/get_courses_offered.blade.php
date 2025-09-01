@@ -17,14 +17,16 @@
                 <tbody>
                     @foreach($offerings as $offering)
                     <?php $curriculum = \App\curriculum::find($offering->curriculum_id); ?>
+                    @if($curriculum)
                     <tr>
-                        <td>{{$curriculum->course_code}}</td>
+                        <td>{{$curriculum->id}}</td>
                         <td>{{$curriculum->course_name}}</td>
                         <td>{{$curriculum->lec}}</td>
                         <td>{{$curriculum->lab}}</td>
                         <td>{{$curriculum->units}}</td>
                         <td class="text-center"><button  onclick="removeoffer('{{$curriculum->id}}','{{$section_name}}')" class="btn btn-danger btn-flat"><i class="fa fa-times"></i></button></td>
                     </tr>
+                    @endif
                     @endforeach
                 </tbody>
             </table>
@@ -44,6 +46,7 @@
 
 <script>
     function removeoffer(curriculum_id,section_name){
+        
         var array = {};
         array['curriculum_id'] = curriculum_id;
         array['section_name'] = section_name;

@@ -15,11 +15,11 @@
           <div class="form-group row align-items-end">
             <div class="col-md-6">
               <label for="prepared_by">Prepared by</label>
-              <input id="prepared_by" name="prepared_by" type="text" class="form-control" value="">
+              <input id="prepared_by" name="prepared_by" type="text" class="form-control" value="{{ $prepby ? $prepby->fullname : ''  }}">
             </div>
             <div class="col-md-4">
               <label for="prepared_by_position">Position</label>
-              <input id="prepared_by_position" name="prepared_by_position" type="text" class="form-control" value="">
+              <input id="prepared_by_position" name="prepared_by_position" type="text" class="form-control" value="{{ $prepby ? $prepby->position : ''  }}">
             </div>
             <div class="col-md-2">
               <label>&nbsp;</label> <!-- Keeps height consistent -->
@@ -32,11 +32,11 @@
           <div class="form-group row align-items-end">
             <div class="col-md-6">
               <label for="recommending_approval">Recommending Approval</label>
-              <input id="recommending_approval" name="recommending_approval" type="text" class="form-control" value="">
+              <input id="recommending_approval" name="recommending_approval" type="text" class="form-control" value=" {{ $rec_approval ? $rec_approval->fullname : ''  }}">
             </div>
             <div class="col-md-4">
               <label for="recommending_approval_position">Position</label>
-              <input id="recommending_approval_position" name="recommending_approval_position" type="text" class="form-control" value="">
+              <input id="recommending_approval_position" name="recommending_approval_position" type="text" class="form-control" value="{{ $rec_approval ? $rec_approval->position : ''  }}">
             </div>
             <div class="col-md-2">
               <label>&nbsp;</label> <!-- Keeps height consistent -->
@@ -49,11 +49,11 @@
           <div class="form-group row align-items-end">
             <div class="col-md-6">
               <label for="approved">Approved</label>
-              <input id="approved" name="approved" type="text" class="form-control" value="">
+              <input id="approved" name="approved" type="text" class="form-control" value="{{ $approved ? $approved->fullname : ''  }}">
             </div>
             <div class="col-md-4">
               <label for="approved_position">Position</label>
-              <input id="approved_position" name="approved_position" type="text" class="form-control" value="">
+              <input id="approved_position" name="approved_position" type="text" class="form-control" value="{{ $approved ? $approved->position : ''  }}">
             </div>
             <div class="col-md-2">
               <label>&nbsp;</label> <!-- Keeps height consistent -->
@@ -66,11 +66,11 @@
           <div class="form-group row align-items-end">
             <div class="col-md-6">
               <label for="conforme">Conforme</label>
-              <input id="conforme" name="conforme" type="text" class="form-control" value="">
+              <input id="conforme" name="conforme" type="text" class="form-control" value="{{ $conforme ? $conforme->fullname : ''  }}">
             </div>
             <div class="col-md-4">
               <label for="conforme_position">Position</label>
-              <input id="conforme_position" name="conforme_position" type="text" class="form-control" value="">
+              <input id="conforme_position" name="conforme_position" type="text" class="form-control" value="{{ $conforme ? $conforme->position : '' }}">
             </div>
             <div class="col-md-2">
               <label>&nbsp;</label> <!-- Keeps height consistent -->

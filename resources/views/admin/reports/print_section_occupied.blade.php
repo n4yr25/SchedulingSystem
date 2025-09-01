@@ -76,11 +76,10 @@
       <tr>
         <td>
           <span style="font-weight: bold">
+            {{ $semester ? $semester : '' }}, 
+            {{ $curriculum_year }} - {{ $curriculum_year + 1 }} / Summer 20__. Asingan Campus
+            </br>
             {{ $section ? $section : '' }}
-          </span>
-          <br />
-          <span style="font-weight: bold">
-            A.Y. {{ $curriculum_year }} - {{ $curriculum_year + 1 }}
           </span>
         </td>
       </tr>
@@ -182,23 +181,23 @@
       <tr>
         <td>
           Prepared by: <br><br><br>
-          <div class="label">WILMAR JENNIE V. MOTEA, MIT</div>
-          Department Chairperson<br />
+          <div class="label">{{ $prepby ? $prepby->fullname : '' }}</div>
+         {{ $prepby ? $prepby->position : '' }}<br />
         </td>
         <td>
           Recommending Approval: <br><br><br>
-          <div class="label">JB O. DORIA, MIT</div>
-          College Dean<br />
+          <div class="label">{{ $rec_approval ? $rec_approval->fullname : '' }}</div>
+          {{  $rec_approval ? $rec_approval->position : '' }}<br />
         </td>
         <td>
           Approved: <br><br><br>
-          <div class="label">MADLYN D. TINGCO, DPA</div>
-          Campus Executive Director<br />
+          <div class="label">{{  $approved ? $approved->fullname : ''}}</div>
+          {{  $approved ? $approved->position : '' }}<br />
         </td>
         <td>
           Conforme: <br><br><br>
-          <div class="label">&nbsp;&nbsp;&nbsp;&nbsp;</div>
-          Faculty<br />
+          <div class="label">  {{ $conforme ? $conforme->fullname : '&nbsp;&nbsp;&nbsp;&nbsp;' }}</div>
+          {{  $conforme ? $conforme->position : '' }}<br />
         </td>
       </tr>
     </table>

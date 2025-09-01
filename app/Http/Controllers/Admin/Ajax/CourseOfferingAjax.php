@@ -139,8 +139,7 @@ class CourseOfferingAjax extends Controller
             $curriculum_id = $request->input('curriculum_id');
 
             $courseOffer = \App\offerings_infos_table::where('curriculum_id', $curriculum_id)
-                ->where('section_name', $section_name)
-                ->first();
+                ->where('section_name', $section_name);
 
             if ($courseOffer) {
                 $courseOffer->delete();
