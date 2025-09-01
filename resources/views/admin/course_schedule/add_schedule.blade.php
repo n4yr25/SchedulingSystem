@@ -112,18 +112,64 @@ if(Auth::user()->is_first_login == 1){
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label>Time Start</label>
-                                <div class="bootstrap-timepicker">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control timepicker" id="time_start">
-
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-clock-o"></i>
-                                        </div>
+                                <div class="input-group">
+                                    <select class="form-control" id="time_start" name="time_start">
+                                        <option value="08:00 AM">8:00 AM</option>
+                                        <option value="08:30 AM">8:30 AM</option>
+                                        <option value="09:00 AM">9:00 AM</option>
+                                        <option value="09:30 AM">9:30 AM</option>
+                                        <option value="10:00 AM">10:00 AM</option>
+                                        <option value="10:30 AM">10:30 AM</option>
+                                        <option value="11:00 AM">11:00 AM</option>
+                                        <option value="11:30 AM">11:30 AM</option>
+                                        <option value="12:00 PM">12:00 PM</option>
+                                        <option value="12:30 PM">12:30 PM</option>
+                                        <option value="01:00 PM">1:00 PM</option>
+                                        <option value="01:30 PM">1:30 PM</option>
+                                        <option value="02:00 PM">2:00 PM</option>
+                                        <option value="02:30 PM">2:30 PM</option>
+                                        <option value="03:00 PM">3:00 PM</option>
+                                        <option value="03:30 PM">3:30 PM</option>
+                                        <option value="04:00 PM">4:00 PM</option>
+                                    </select>
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-clock-o"></i>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4">
+                            <div class="form-group">
+                                <label>Time End</label>
+                                <div class="input-group">
+                                    <select class="form-control" id="time_end" name="time_end">
+                                        <option value="09:00 AM">9:00 AM</option>
+                                        <option value="09:30 AM">9:30 AM</option>
+                                        <option value="10:00 AM">10:00 AM</option>
+                                        <option value="10:30 AM">10:30 AM</option>
+                                        <option value="11:00 AM">11:00 AM</option>
+                                        <option value="11:30 AM">11:30 AM</option>
+                                        <option value="12:00 PM">12:00 PM</option>
+                                        <option value="12:30 PM">12:30 PM</option>
+                                        <option value="01:00 PM">1:00 PM</option>
+                                        <option value="01:30 PM">1:30 PM</option>
+                                        <option value="02:00 PM">2:00 PM</option>
+                                        <option value="02:30 PM">2:30 PM</option>
+                                        <option value="03:00 PM">3:00 PM</option>
+                                        <option value="03:30 PM">3:30 PM</option>
+                                        <option value="04:00 PM">4:00 PM</option>
+                                        <option value="03:30 PM">4:30 PM</option>
+                                        <option value="04:00 PM">5:00 PM</option>
+                                    </select>
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-clock-o"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        {{-- <div class="col-sm-4">
                             <div class="form-group">
                                 <label>Time End</label>
                                 <div class="bootstrap-timepicker">
@@ -136,7 +182,7 @@ if(Auth::user()->is_first_login == 1){
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="col-sm-1">
                             <label>Add</label>
                             <a  onclick="addschedule(day.value,time_start.value,time_end.value)" class="btn btn-flat btn-success"><i class="fa fa-plus-circle"></i></a>
