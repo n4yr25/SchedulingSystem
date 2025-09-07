@@ -121,7 +121,7 @@ class CourseScheduleController extends Controller
             
             $schedule = \App\room_schedules::find($schedule_id);
             $schedule->is_active = 0;
-            $schedule->offering_id = NULL;
+            // $schedule->offering_id = NULL;
             $schedule->update();
             
             Session::flash('error','Changed the status of the schedule!');
