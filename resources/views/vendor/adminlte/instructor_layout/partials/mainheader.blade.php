@@ -4,9 +4,9 @@
     <!-- Logo -->
     <a href="{{ url('/home') }}" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>JEFF</b></span>
+        <span class="logo-mini"><b>PSU - Asingan</b></span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>JEFF</b></span>
+        <span class="logo-lg"><b>PSU - Asingan</b></span>
     </a>
 
     <!-- Header Navbar -->
@@ -34,7 +34,7 @@
                                     <a href="#">
                                         <div class="pull-left">
                                             <!-- User Image -->
-                                            <img src="{{ asset('images/avatar5.png') }}" class="img-circle" alt="User Image"/>
+                                            {{-- <img src="{{ Gravatar::get($user->email) }}" class="img-circle" alt="User Image"/> --}}
                                         </div>
                                         <!-- Message title and timestamp -->
                                         <h4>
@@ -127,7 +127,7 @@
                                 <img src="{{ asset('images/avatar5.png') }}" class="img-circle" alt="User Image" />
                                 <p>
                                     {{ Auth::user()->name }}
-                                    <small>{{ trans('adminlte_lang::message.login') }} </small>
+                                    <small>Logged In</small>
                                 </p>
                             </li>
                             <!-- Menu Body -->
@@ -144,14 +144,14 @@
                             </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">
-                                <div class="pull-left">
+                                {{-- <div class="pull-left">
 <!--                                    <a href="{{ url('/settings') }}" class="btn btn-default btn-flat">{{ trans('adminlte_lang::message.profile') }}</a>-->
-                                </div>
-                                <div class="pull-right">
+                                </div> --}}
+                                <div class="text-center">
                                     <a href="{{ url('/logout') }}" class="btn btn-default btn-flat"
                                        onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
-                                        {{ trans('adminlte_lang::message.signout') }}
+                                        Sign Out
                                     </a>
 
                                     <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
