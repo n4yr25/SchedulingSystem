@@ -267,12 +267,12 @@ $('#calendar').fullCalendar({
      eventRender: function(event, element) {
         element.find('div.fc-title').html(element.find('div.fc-title').text()) ;
      },
-    eventClick: function(event){
-        var boolean = confirm('Clicking the OK button button will change the status of the schedule. Do you wish to continue?');
-        if(boolean == true){
-            window.open('/admin/course_scheduling/remove_schedule/'+event.id+'/'+event.offering_id,'_self');
-        }
-    }
+    // eventClick: function(event){
+    //     var boolean = confirm('Clicking the OK button button will change the status of the schedule. Do you wish to continue?');
+    //     if(boolean == true){
+    //         window.open('/admin/course_scheduling/remove_schedule/'+event.id+'/'+event.offering_id,'_self');
+    //     }
+    // }
  });
 </script>
 @endsection
