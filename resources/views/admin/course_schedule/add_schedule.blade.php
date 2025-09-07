@@ -103,8 +103,6 @@ if(Auth::user()->is_first_login == 1){
                                     <option value="W">Wednesday</option>
                                     <option value="Th">Thursday</option>
                                     <option value="F">Friday</option>
-                                    <option value="Sa">Saturday</option>
-                                    <option value="Su">Sunday</option>
                                 </select>
                             </div>
                         </div>

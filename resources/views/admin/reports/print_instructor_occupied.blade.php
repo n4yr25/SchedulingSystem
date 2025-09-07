@@ -98,18 +98,17 @@
           <th>Wednesday</th>
           <th>Thursday</th>
           <th>Friday</th>
-          <th>Saturday</th>
         </tr>
       </thead>
       <tbody>
 @php
     use Carbon\Carbon;
 
-    $days = ['M', 'T', 'W', 'Th', 'F', 'Sa'];
+    $days = ['M', 'T', 'W', 'Th', 'F'];
     $timeSlots = [
-        '07:00 - 08:00','08:00 - 09:00','09:00 - 10:00','10:00 - 11:00',
+        '08:00 - 09:00','09:00 - 10:00','10:00 - 11:00',
         '11:00 - 12:00','12:00 - 13:00','13:00 - 14:00','14:00 - 15:00',
-        '15:00 - 16:00','16:00 - 17:00','17:00 - 18:00','18:00 - 19:00'
+        '15:00 - 16:00','16:00 - 17:00','17:00 - 18:00'
     ];
 
     // Parse time slots
@@ -200,7 +199,7 @@
         </td>
         <td>
           Conforme: <br><br><br>
-          <div class="label">  {{ $conforme ? $conforme->fullname : '&nbsp;&nbsp;&nbsp;&nbsp;' }}</div>
+          <div class="label">  {{ $conforme ? $conforme->fullname : '' }}</div>
           {{  $conforme ? $conforme->position : '' }}<br />
         </td>
       </tr>

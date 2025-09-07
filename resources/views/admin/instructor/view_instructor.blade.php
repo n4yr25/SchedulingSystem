@@ -82,7 +82,7 @@ if(Auth::user()->is_first_login == 1){
                                     <td>{{$instructor->username}}</td>
                                     <td>{{strtoupper($instructor->lastname)}}, {{strtoupper($instructor->name)}}</td>
                                 <?php $info = \App\instructors_infos::where('instructor_id',$instructor->id)->first();?>
-                                    <td>{{$info->department}}</td>
+                                    <td>{{$info->college}}</td>
                                     <td>{{$info->employee_type}}</td>
                                     <td><a href="{{url('/admin/instructor/view_instructor_account',array($instructor->id))}}" class="btn btn-flat btn-success"><i class="fa fa-user"></i></a></td>
                                 </tr>

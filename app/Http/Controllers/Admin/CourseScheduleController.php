@@ -23,17 +23,16 @@ class CourseScheduleController extends Controller
     }
     
     function add_schedule($offering_id,$section_name){
-            $offering = \App\offerings_infos_table::find($offering_id);
-            $curricula = \App\curriculum::find($offering->curriculum_id);
-            $inactive = \App\room_schedules::where('is_active',0)->get();
-            // $instructor = "";
-            // $instructor = \App\instructors_infos::join('users','users.id','instructors_infos.instructor_id')
-            //     ->join('room_schedules','room_schedules.instructor','instructors_infos.instructor_id')
-            //     ->where('is_active',1)->get(['users.name','users.lastname']);
-            $get_schedule = $this->getSchedule($offering_id);
-            $is_complab = \App\curriculum::find($offering->curriculum_id)->is_complab;
-            return view('admin.course_schedule.add_schedule',compact('offering','curricula','inactive','offering_id','get_schedule','section_name','is_complab'));
-        
+        $offering = \App\offerings_infos_table::find($offering_id);
+        $curricula = \App\curriculum::find($offering->curriculum_id);
+        $inactive = \App\room_schedules::where('is_active',0)->get();
+        // $instructor = "";
+        // $instructor = \App\instructors_infos::join('users','users.id','instructors_infos.instructor_id')
+        //     ->join('room_schedules','room_schedules.instructor','instructors_infos.instructor_id')
+        //     ->where('is_active',1)->get(['users.name','users.lastname']);
+        $get_schedule = $this->getSchedule($offering_id);
+        $is_complab = \App\curriculum::find($offering->curriculum_id)->is_complab;
+        return view('admin.course_schedule.add_schedule',compact('offering','curricula','inactive','offering_id','get_schedule','section_name','is_complab'));
     }
     
     public static function getSchedule($offering_id){
@@ -118,8 +117,6 @@ class CourseScheduleController extends Controller
     }
     
     function remove_schedule($schedule_id,$offering_id){
-        
-            
             $offering = \App\offerings_infos_table::find($offering_id);
             
             $schedule = \App\room_schedules::find($schedule_id);
@@ -128,8 +125,8 @@ class CourseScheduleController extends Controller
             $schedule->update();
             
             Session::flash('error','Changed the status of the schedule!');
+            
             return redirect(url('/admin/course_scheduling/schedule',array($offering_id,$offering->section_name)));
-        
     }
     
     function attach_schedule($schedule_id,$offering_id){
