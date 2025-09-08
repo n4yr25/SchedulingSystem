@@ -26,7 +26,34 @@ class CourseOfferingController extends Controller
         $sections = \App\CtrSection::where('program_code',$program_code)->where('is_active',1)->get();
         return view('admin.course_offering.course_offering_program',compact('curriculum_year','program_code','program','sections'));
     }
-    
+
+    function add_course(){
+       return view('admin.course_offering.add_course');
+    }
+
+    function new_course(Request $request)
+{
+    foreach ($request->program_code as $index => $code) {
+        $programName = $request->program_name[$index];
+
+        $check_exists = \App\academic_programs::where('program_code', $code)
+            ->where('program_name', $programName)
+            ->first();
+
+        if (!$check_exists) {
+            $new_course = new \App\academic_programs;
+            $new_course->academic_type = 'College';
+            $new_course->program_code  = $code;
+            $new_course->program_name  = $programName;
+            $new_course->save();
+        }
+    }
+
+    Session::flash('success', 'Successfully saved the record!');
+    return redirect(url('/admin/course_offerings'));
+}
+
+        
     function section_management(){
         $sections = \App\CtrSection::where('is_active',1)->get();
         $programs = \App\academic_programs::distinct()->get(['program_code','program_name']);

@@ -15,6 +15,7 @@ if(Auth::user()->is_first_login == 1){
 
 
 ?>
+
 @extends($layout)
 
 @section('main-content')
@@ -35,9 +36,12 @@ if(Auth::user()->is_first_login == 1){
     <div class="box box-default">
         <div class="box-header">
             <h5 class="box-title">Academic Programs</h5>
+            <div class="box-tools pull-right">
+                <a href="{{ url('/admin/course_offerings/add_course') }}" class="btn btn-flat btn-success" ><i class="fa fa-upload"></i> New Course</a>
+            </div>
         </div>
         <div class="box-body">
-            <div class="table-responsive">
+            <div class="table-responsive"> 
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>

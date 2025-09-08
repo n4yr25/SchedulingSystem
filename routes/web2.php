@@ -9,6 +9,8 @@ Route::post('/admin/section_management/update','Admin\CourseOfferingController@u
 
 //course offerings
 Route::get('/admin/course_offerings','Admin\CourseOfferingController@course_offering_index');
+Route::get('/admin/course_offerings/add_course','Admin\CourseOfferingController@add_course');
+Route::post('/admin/course_offerings/save_course','Admin\CourseOfferingController@new_course');
 Route::get('/admin/course_offerings/{program_code}','Admin\CourseOfferingController@course_offering_program');
 Route::get('/ajax/admin/course_offerings/get_courses','Admin\Ajax\CourseOfferingAjax@get_courses');
 Route::get('/ajax/admin/course_offerings/get_courses_offered','Admin\Ajax\CourseOfferingAjax@get_courses_offered');
