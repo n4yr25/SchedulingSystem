@@ -46,13 +46,27 @@
       }
       .footer td {
         border: 1px solid black;
-        height: 60px;
-        vertical-align: bottom;
-      }
-      .footer .label {
+        height: 120px;        /* fixed height for all cells */
+        vertical-align: bottom; /* keep text at bottom */
+        text-align: center;
+        position: relative;   /* allows absolute positioning */
+        padding-bottom: 25px; /* space for text */
+    }
+
+    .footer img {
+        left: 50%;
+        transform: translateX(-50%); /* center horizontally */
+        height: 50px;         /* fixed small size */
+        pointer-events: none; /* makes image non-interactive */
+    }
+    .footer .label {
         font-weight: bold;
         text-decoration: underline;
-      }
+        display: block;
+        margin-top: 5px;
+    }
+
+
     </style>
   </head>
   <body>
@@ -183,26 +197,42 @@
     <table class="footer">
       <tr>
         <td>
-          Prepared by: <br><br><br>
+          Prepared by: <br>
+          @if ($prepby && $prepby->signature_path)
+            <img src="{{ public_path('uploads/signatures/' . $prepby->signature_path) }}" alt="Signature">
+          @endif
           <div class="label">{{ $prepby ? $prepby->fullname : '' }}</div>
-         {{ $prepby ? $prepby->position : '' }}<br />
+          {{ $prepby ? $prepby->position : '' }}
         </td>
-        <td>
-          Recommending Approval: <br><br><br>
-          <div class="label">{{ $rec_approval ? $rec_approval->fullname : '' }}</div>
-          {{  $rec_approval ? $rec_approval->position : '' }}<br />
-        </td>
-        <td>
-          Approved: <br><br><br>
-          <div class="label">{{  $approved ? $approved->fullname : ''}}</div>
-          {{  $approved ? $approved->position : '' }}<br />
-        </td>
-        <td>
-          Conforme: <br><br><br>
-          <div class="label">  {{ $conforme ? $conforme->fullname : '' }}</div>
-          {{  $conforme ? $conforme->position : '' }}<br />
-        </td>
-      </tr>
-    </table>
+
+
+    <td>
+      Recommending Approval: <br>
+      @if ($rec_approval && $rec_approval->signature_path)
+        <img src="{{ public_path('uploads/signatures/' . $rec_approval->signature_path) }}" width="120">
+      @endif
+      <div class="label">{{ $rec_approval ? $rec_approval->fullname : '' }}</div>
+      {{ $rec_approval ? $rec_approval->position : '' }}
+    </td>
+
+    <td>
+      Approved: <br>
+      @if ($approved && $approved->signature_path)
+        <img src="{{ public_path('uploads/signatures/' . $approved->signature_path) }}" width="120">
+      @endif
+      <div class="label">{{ $approved ? $approved->fullname : '' }}</div>
+      {{ $approved ? $approved->position : '' }}
+    </td>
+
+    <td>
+      Conforme: <br>
+      @if ($conforme && $conforme->signature_path)
+        <img src="{{ public_path('uploads/signatures/' . $conforme->signature_path) }}" width="120">
+      @endif
+      <div class="label">{{ $conforme ? $conforme->fullname : '' }}</div>
+      {{ $conforme ? $conforme->position : '' }}
+    </td>
+  </tr>
+</table>
   </body>
 </html>

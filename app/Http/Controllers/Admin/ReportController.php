@@ -45,19 +45,19 @@ class ReportController extends Controller
 
         $semester = $schedules->first()->period;
 
-        $prepby = \App\Signatories::select('fullname', 'position')
+        $prepby = \App\Signatories::select('fullname', 'position', 'signature_path')
             ->where('role', 1)
             ->latest('created_at')
             ->first();
-        $rec_approval = \App\Signatories::select('fullname', 'position')
+        $rec_approval = \App\Signatories::select('fullname', 'position', 'signature_path')
             ->where('role', 2)
             ->latest('created_at')
             ->first();
-        $approved = \App\Signatories::select('fullname', 'position')
+        $approved = \App\Signatories::select('fullname', 'position', 'signature_path')
             ->where('role', 3)
             ->latest('created_at')
             ->first();
-        $conforme = \App\Signatories::select('fullname', 'position')
+        $conforme = \App\Signatories::select('fullname', 'position', 'signature_path')
             ->where('role', 4)
             ->latest('created_at')
             ->first();  
@@ -112,19 +112,19 @@ class ReportController extends Controller
         $section = $schedules->first()->section_name;
         $semester = $schedules->first()->period;
 
-        $prepby = \App\Signatories::select('fullname', 'position')
+        $prepby = \App\Signatories::select('fullname', 'position', 'signature_path')
             ->where('role', 1)
             ->latest('created_at')
             ->first();
-        $rec_approval = \App\Signatories::select('fullname', 'position')
+        $rec_approval = \App\Signatories::select('fullname', 'position', 'signature_path')
             ->where('role', 2)
             ->latest('created_at')
             ->first();
-        $approved = \App\Signatories::select('fullname', 'position')
+        $approved = \App\Signatories::select('fullname', 'position', 'signature_path')
             ->where('role', 3)
             ->latest('created_at')
             ->first();
-        $conforme = \App\Signatories::select('fullname', 'position')
+        $conforme = \App\Signatories::select('fullname', 'position', 'signature_path')
             ->where('role', 4)
             ->latest('created_at')
             ->first();  
@@ -159,19 +159,19 @@ class ReportController extends Controller
         $curriculum_year = $schedules->first()->curriculum_year;
         $faculty = $schedules->first()->name . " " . $schedules->first()->lastname;
 
-        $prepby = \App\Signatories::select('fullname', 'position')
+        $prepby = \App\Signatories::select('fullname', 'position', 'signature_path')
             ->where('role', 1)
             ->latest('created_at')
             ->first();
-        $rec_approval = \App\Signatories::select('fullname', 'position')
+        $rec_approval = \App\Signatories::select('fullname', 'position', 'signature_path')
             ->where('role', 2)
             ->latest('created_at')
             ->first();
-        $approved = \App\Signatories::select('fullname', 'position')
+        $approved = \App\Signatories::select('fullname', 'position', 'signature_path')
             ->where('role', 3)
             ->latest('created_at')
             ->first();
-        $conforme = \App\Signatories::select('fullname', 'position')
+        $conforme = \App\Signatories::select('fullname', 'position', 'signature_path')
             ->where('role', 4)
             ->latest('created_at')
             ->first();  

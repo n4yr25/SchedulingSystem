@@ -10,5 +10,6 @@ class signatories extends Model
         'fullname',
         'position',
         'role',
+        'signature_path'
     ];
 }

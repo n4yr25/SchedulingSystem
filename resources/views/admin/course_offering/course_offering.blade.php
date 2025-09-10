@@ -19,6 +19,13 @@ if(Auth::user()->is_first_login == 1){
 @extends($layout)
 
 @section('main-content')
+@if(Session::has('success'))
+<div class='col-sm-12'>
+    <div class='callout callout-success'>
+        {{Session::get('success')}}
+    </div>
+</div>
+@endif
 <section class="content-header">
       <h1><i class="fa fa-calendar-check-o "></i>  
         Course Offerings
