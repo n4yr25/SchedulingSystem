@@ -32,26 +32,25 @@ class CourseOfferingController extends Controller
     }
 
     function new_course(Request $request)
-{
-    foreach ($request->program_code as $index => $code) {
-        $programName = $request->program_name[$index];
+    {
+        foreach ($request->program_code as $index => $code) {
+            $programName = $request->program_name[$index];
 
-        $check_exists = \App\academic_programs::where('program_code', $code)
-            ->where('program_name', $programName)
-            ->first();
+            $check_exists = \App\academic_programs::where('program_code', $code)
+                ->where('program_name', $programName)
+                ->first();
 
-        if (!$check_exists) {
-            $new_course = new \App\academic_programs;
-            $new_course->academic_type = 'College';
-            $new_course->program_code  = $code;
-            $new_course->program_name  = $programName;
-            $new_course->save();
+            if (!$check_exists) {
+                $new_course = new \App\academic_programs;
+                $new_course->academic_type = 'College';
+                $new_course->program_code  = $code;
+                $new_course->program_name  = $programName;
+                $new_course->save();
+            }
         }
+        Session::flash('success', 'Successfully saved the record!');
+        return redirect(url('/admin/course_offerings'));
     }
-
-    Session::flash('success', 'Successfully saved the record!');
-    return redirect(url('/admin/course_offerings'));
-}
 
         
     function section_management(){
@@ -121,48 +120,48 @@ class CourseOfferingController extends Controller
             return view('admin.course_offering.room_management_archive',compact('rooms'));
     }
     
-    function new_room(Request $request){
-            
-            $check_exists = \App\CtrRoom::where('room',$request->room)
-                    ->where('building',$request->building)
-                    ->get();
-            if($check_exists->isEmpty()){
-                $new_room = new \App\CtrRoom;
-                $new_room->room = $request->room;
-                $new_room->building = $request->building;
-                $new_room->description = $request->description;
-                $new_room->is_active = 1;
-                $new_room->save();
-                Session::flash('success','Successfully saved the record!');
-                return redirect(url('/admin/room_management'));
-            }else{
-                Session::flash('error','Room Already Exists! Please Try Again!');
-                return redirect(url('/admin/room_management'));
-            }
+    function new_room(Request $request)
+    {
+        $check_exists = \App\CtrRoom::where('room',$request->room)
+                ->where('building',$request->building)
+                ->get();
+        if($check_exists->isEmpty()){
+            $new_room = new \App\CtrRoom;
+            $new_room->room = $request->room;
+            $new_room->building = $request->building;
+            $new_room->description = $request->description;
+            $new_room->is_active = 1;
+            $new_room->save();
+            Session::flash('success','Successfully saved the record!');
+            return redirect(url('/admin/room_management'));
+        }else{
+            Session::flash('error','Room Already Exists! Please Try Again!');
+            return redirect(url('/admin/room_management'));
+        }
     }
     
     function archive_room($room_id){
-            $archive = \App\CtrRoom::find($room_id);
-            if($archive->is_active == 1){
-                $archive->is_active = 0;
-                $archive->update();
-                Session::flash('error',$archive->room. " has been moved to the archive section.");
-                return redirect(url('/admin/room_management'));
-            }else{
-                $archive->is_active = 1;
-                $archive->update();
-                Session::flash('success',$archive->room. " has been restored.");
-                return redirect(url('/admin/room_management'));
-            }
+        $archive = \App\CtrRoom::find($room_id);
+        if($archive->is_active == 1){
+            $archive->is_active = 0;
+            $archive->update();
+            Session::flash('error',$archive->room. " has been moved to the archive section.");
+            return redirect(url('/admin/room_management'));
+        }else{
+            $archive->is_active = 1;
+            $archive->update();
+            Session::flash('success',$archive->room. " has been restored.");
+            return redirect(url('/admin/room_management'));
+        }
     }
     
     function update_room(Request $request){
-            $room = \App\CtrRoom::find($request->room_id);
-            $room->room = $request->room;
-            $room->building = $request->building;
-            $room->description = $request->description;
-            $room->update();
-            Session::flash('success','Successfully updated the record!');
-            return redirect(url('/admin/room_management'));
+        $room = \App\CtrRoom::find($request->room_id);
+        $room->room = $request->room;
+        $room->building = $request->building;
+        $room->description = $request->description;
+        $room->update();
+        Session::flash('success','Successfully updated the record!');
+        return redirect(url('/admin/room_management'));
     }
 }
