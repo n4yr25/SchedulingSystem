@@ -95,7 +95,8 @@ if(Auth::user()->is_first_login == 1){
                     <div class="form-group">
                         <div class="col-sm-3">
                             <label><b>ID Number</b><span style="color:red; margin-left: 2px;">*</span></label>
-                            <input class="form form-control" name="username" placeholder="ID Number" value="{{old('instructor_id')}}" type="text" required>
+                            <input class="form form-control" id="username" name="username" placeholder="ID Number" onkeyup="isUsernameExist()" value="{{old('instructor_id')}}" type="text" required>
+                            <p id="usernameValidation"></p>
                         </div>
                         <div class="col-sm-9">
                             <label><b>Email</b></label>
@@ -200,17 +201,26 @@ if(Auth::user()->is_first_login == 1){
                     <h3 class="box-title"><b>Account Information</b></h3>
                 </div>
                 <div class="box-body">
-                    <div class="form form-group">
+                    <div class="form form-group row">
                         <div class="col-sm-6">
                             <label><b>Password</b></label>
-                            <input type="password" class="form-control" placeholder="Password" name="password">
+                            <input type="password" class="form-control" placeholder="Password" name="password" id="password" required>
                         </div>
                         <div class="col-sm-6">
                             <label><b>Confirm Password</b></label>
-                            <input type="password" class="form-control" placeholder="Confirm Password" name="confirm_password">
+                            <input type="password" 
+                                class="form-control" 
+                                placeholder="Confirm Password" 
+                                name="confirm_password" 
+                                id="confirm_password" 
+                                required
+                                onkeyup="this.setCustomValidity(this.value !== document.getElementById('password').value ? 'Passwords do not match' : ''); 
+                                            document.getElementById('passwordHelp').textContent = this.value !== document.getElementById('password').value ? 'Passwords do not match!' : '';">
+                            <small id="passwordHelp" class="text-danger"></small>
                         </div>
                     </div>
                 </div>
+
             </div>
 
             <div class='form form-group'>
@@ -221,8 +231,37 @@ if(Auth::user()->is_first_login == 1){
         </form>       
     </div>
 </section>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+function isUsernameExist() {
+    
+    var username = document.getElementById("username").value;
+
+    if (username.trim() === "") {
+        document.getElementById("usernameValidation").innerHTML = "";
+        return;
+    }
+
+    $.ajax({
+        type: "GET",
+        url: "/admin/instructor/verify_username/" + username,
+        success: function(response) {
+            if (response == 1) {
+                document.getElementById("usernameValidation").innerHTML = 
+                "<span style='color:red; font-weight:bold;'>Username already exists.</span>";
+            } else {
+                document.getElementById("usernameValidation").innerHTML = 
+                "<span style='color:green; font-weight:bold;'>Username available.</span>";
+            }
+        },
+        error: function() {
+            document.getElementById("usernameValidation").innerHTML = "Error checking username.";
+        }
+    });
+}
+</script>
+
 @endsection
 @section('footerscript')
 @endsection
-
-    

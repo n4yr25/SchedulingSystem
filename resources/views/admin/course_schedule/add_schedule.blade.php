@@ -156,8 +156,8 @@ if(Auth::user()->is_first_login == 1){
                                         <option value="03:00 PM">3:00 PM</option>
                                         <option value="03:30 PM">3:30 PM</option>
                                         <option value="04:00 PM">4:00 PM</option>
-                                        <option value="03:30 PM">4:30 PM</option>
-                                        <option value="04:00 PM">5:00 PM</option>
+                                        <option value="04:30 PM">4:30 PM</option>
+                                        <option value="05:00 PM">5:00 PM</option>
                                     </select>
                                     <div class="input-group-addon">
                                         <i class="fa fa-clock-o"></i>

@@ -3,9 +3,9 @@
     <div class='box-header'>
         <h5 class='box-title'>Courses Offered</h5>
         {{-- export button --}}
-        <div class='box-tools pull-right'>
+        {{-- <div class='box-tools pull-right'>
             <button class='btn btn-flat btn-success' onclick="exportToExcel()"><i class="fa fa-file-excel-o"></i> Export to Excel</button>
-        </div>
+        </div> --}}
     </div>
     <div class='box-body'>
         <div class='table-responsive'>

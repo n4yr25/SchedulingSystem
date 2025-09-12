@@ -43,6 +43,8 @@
     //instructor
     Route::get('/admin/instructor/add_instructor', 'Users\Instructor\ViewInstructorsController@index');
     Route::post('/admin/instructor/add_new_instructor', 'Users\Instructor\ViewInstructorsController@add');
+    Route::get('/admin/instructor/verify_username/{username}', 'Users\Instructor\ViewInstructorsController@verify_username');
+    Route::post('/admin/instructor/change_status', 'Users\Instructor\ViewInstructorsController@setInActive');
     Route::get('/admin/instructor/view_instructor', 'Users\Instructor\ViewInstructorController@');
     Route::post('/admin/instructor/update/{id}', [
         'uses' => 'Users\Instructor\ViewInstructorsController@updateinstructor',

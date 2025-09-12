@@ -189,6 +189,9 @@ if(Auth::user()->is_first_login == 1){
                                 <option value="">Select Employee Type</option>
                                 <option @if($info->employee_type == 'Full Time') selected='selected' @endif value="Full Time">Full Time</option>
                                 <option @if($info->employee_type == 'Part Time') selected='selected' @endif value="Part Time">Part Time</option>
+                                @if (isset($info->employee_type))
+                                    <option @if($info->employee_type == 'Inactive') selected='selected' @endif value="Inactive">Inactive</option> 
+                                @endif
                             </select>
                         </div>
                     </div>

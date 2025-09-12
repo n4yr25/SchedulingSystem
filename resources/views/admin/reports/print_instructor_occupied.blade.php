@@ -51,22 +51,19 @@
         text-align: center;
         position: relative;   /* allows absolute positioning */
         padding-bottom: 25px; /* space for text */
-    }
-
-    .footer img {
-        left: 50%;
-        transform: translateX(-50%); /* center horizontally */
-        height: 50px;         /* fixed small size */
-        pointer-events: none; /* makes image non-interactive */
-    }
-    .footer .label {
-        font-weight: bold;
-        text-decoration: underline;
-        display: block;
-        margin-top: 5px;
-    }
-
-
+      }
+      .footer img {
+          left: 50%;
+          transform: translateX(-50%); /* center horizontally */
+          height: 50px;         /* fixed small size */
+          pointer-events: none; /* makes image non-interactive */
+      }
+      .footer .label {
+          font-weight: bold;
+          text-decoration: underline;
+          display: block;
+          margin-top: 5px;
+      }
     </style>
   </head>
   <body>
@@ -115,79 +112,79 @@
         </tr>
       </thead>
       <tbody>
-@php
-    use Carbon\Carbon;
+    @php
+      use Carbon\Carbon;
 
-    $days = ['M', 'T', 'W', 'Th', 'F'];
-    $timeSlots = [
-        '08:00 - 09:00','09:00 - 10:00','10:00 - 11:00',
-        '11:00 - 12:00','12:00 - 13:00','13:00 - 14:00','14:00 - 15:00',
-        '15:00 - 16:00','16:00 - 17:00',
-    ];
+      $days = ['M', 'T', 'W', 'Th', 'F'];
+      $timeSlots = [
+          '08:00 - 09:00','09:00 - 10:00','10:00 - 11:00',
+          '11:00 - 12:00','12:00 - 13:00','13:00 - 14:00','14:00 - 15:00',
+          '15:00 - 16:00','16:00 - 17:00',
+      ];
 
-    // Parse time slots
-    $parsedSlots = [];
-    foreach ($timeSlots as $slot) {
+      // Parse time slots
+      $parsedSlots = [];
+      foreach ($timeSlots as $slot) {
         [$start, $end] = explode(' - ', $slot);
         $parsedSlots[] = [
-            'label' => Carbon::createFromFormat('H:i', $start)->format('h:i A') . ' - ' . Carbon::createFromFormat('H:i', $end)->format('h:i A'),
-            'start' => Carbon::createFromFormat('H:i', $start),
-            'end' => Carbon::createFromFormat('H:i', $end),
+          'label' => Carbon::createFromFormat('H:i', $start)->format('h:i A') . ' - ' . Carbon::createFromFormat('H:i', $end)->format('h:i A'),
+          'start' => Carbon::createFromFormat('H:i', $start),
+          'end' => Carbon::createFromFormat('H:i', $end),
         ];
-    }
+      }
 
-    $rendered = [];
-@endphp
+      $rendered = [];
+    @endphp
 
-@for ($i = 0; $i < count($parsedSlots); $i++)
-    <tr>
+    @for ($i = 0; $i < count($parsedSlots); $i++)
+      <tr>
         <td>{{ $parsedSlots[$i]['label'] }}</td>
         @foreach($days as $day)
+          @php
+            if (isset($rendered[$day][$i]) && $rendered[$day][$i]) {
+                continue;
+            }
+            $printed = false;
+          @endphp
+
+          @foreach ($schedules as $sched)
             @php
-                if (isset($rendered[$day][$i]) && $rendered[$day][$i]) {
-                    continue;
-                }
-                $printed = false;
-            @endphp
+              if ($sched->day != $day) continue;
 
-            @foreach ($schedules as $sched)
-                @php
-                    if ($sched->day != $day) continue;
+                $schedStart = Carbon::createFromFormat('H:i:s', $sched->time_starts);
+                $schedEnd = Carbon::createFromFormat('H:i:s', $sched->time_end);
 
-                    $schedStart = Carbon::createFromFormat('H:i:s', $sched->time_starts);
-                    $schedEnd = Carbon::createFromFormat('H:i:s', $sched->time_end);
-
-                    if ($schedStart->eq($parsedSlots[$i]['start'])) {
-                        $rowspan = 0;
-                        for ($j = $i; $j < count($parsedSlots); $j++) {
-                            if ($schedStart < $parsedSlots[$j]['end'] && $schedEnd > $parsedSlots[$j]['start']) {
-                                $rowspan++;
-                                $rendered[$day][$j] = true;
-                            }
-                        }
-                @endphp
-
-                <td rowspan="{{ $rowspan }}">
-                    RM. {{ $sched->room }}<br>
-                    {{ $sched->program_code }} - 
-                    {{ $sched->course_code }}<br>
-                    {{ $sched->section_name }}<br>
-                    {{ $sched->level }}
-                </td>
-
-                @php
-                        $printed = true;
-                        break;
+                if ($schedStart->eq($parsedSlots[$i]['start'])) {
+                  $rowspan = 0;
+                  for ($j = $i; $j < count($parsedSlots); $j++) {
+                    if ($schedStart < $parsedSlots[$j]['end'] && $schedEnd > $parsedSlots[$j]['start']) {
+                      $rowspan++;
+                      $rendered[$day][$j] = true;
                     }
-                @endphp
-            @endforeach
+                  }
+              @endphp
 
-            @if (!$printed)
-                <td></td>
-            @endif
-        @endforeach
-    </tr>
-@endfor
+              <td rowspan="{{ $rowspan }}">
+                RM. {{ $sched->room }}<br>
+                {{ $sched->program_code }} - 
+                {{ $sched->course_code }}<br>
+                {{ $sched->section_name }}<br>
+                {{ $sched->level }}
+              </td>
+
+              @php
+                  $printed = true;
+                  break;
+                  }
+              @endphp
+                @endforeach
+
+                @if (!$printed)
+                    <td></td>
+                @endif
+            @endforeach
+        </tr>
+    @endfor
 
 
 
@@ -234,5 +231,6 @@
     </td>
   </tr>
 </table>
+  
   </body>
 </html>

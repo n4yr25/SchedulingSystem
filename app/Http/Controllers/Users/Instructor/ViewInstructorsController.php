@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Users\Instructor;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\User;
 use DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Input;
@@ -252,5 +253,15 @@ class ViewInstructorsController extends Controller
         return view('admin.curriculum_management.ajax.refresh_curriculum',compact('curricula','program','program_code'));
     }
     
-    
+    function verify_username($username){
+        // $exists = User::where('username', 'like', '%' . $username . '%')->exists();
+        $exists = User::whereRaw('LOWER(username) = ?', [strtolower($username)])->exists();
+
+
+        if ($exists) {
+            return true;
+        } 
+
+        return false;
+    }
 }

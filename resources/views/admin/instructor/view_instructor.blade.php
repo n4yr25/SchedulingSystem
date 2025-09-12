@@ -78,10 +78,12 @@ if(Auth::user()->is_first_login == 1){
                             <tbody>
                                 @foreach($instructors as $instructor)
                                 <?php $users = \App\User::where('id',$instructor->id)->first(); ?>
-                                <tr>
+                                <?php $info = \App\instructors_infos::where('instructor_id',$instructor->id)->first();?>
+                                <tr @if ($info->employee_type == 'Inactive')
+                                    style="color:red; font-weight:bold;"              
+                                @endif>
                                     <td>{{$instructor->username}}</td>
                                     <td>{{strtoupper($instructor->lastname)}}, {{strtoupper($instructor->name)}}</td>
-                                <?php $info = \App\instructors_infos::where('instructor_id',$instructor->id)->first();?>
                                     <td>{{$info->college}}</td>
                                     <td>{{$info->employee_type}}</td>
                                     <td><a href="{{url('/admin/instructor/view_instructor_account',array($instructor->id))}}" class="btn btn-flat btn-success"><i class="fa fa-user"></i></a></td>

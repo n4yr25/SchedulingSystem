@@ -85,8 +85,8 @@ class CourseScheduleAjax extends Controller
                 ->get();
 
             $instructors = instructors_infos::join('users', 'users.id', '=', 'instructors_infos.instructor_id')
-    ->get(['instructors_infos.instructor_id', 'users.name', 'users.lastname']);
-
+                ->where('instructors_infos.employee_type', '!=' , 'Inactive')
+                ->get(['instructors_infos.instructor_id', 'users.name', 'users.lastname']);
 
             // Filter available rooms
             if ($conflict_schedules->isNotEmpty()) {
