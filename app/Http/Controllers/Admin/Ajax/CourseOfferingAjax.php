@@ -89,7 +89,9 @@ class CourseOfferingAjax extends Controller
             $period = $request->input('period');
             $section_name = $request->input('section_name');
 
-            $offerings = offerings_infos_table::where('section_name', $section_name)->get();
+            $offerings = offerings_infos_table::where('section_name', $section_name)
+                ->where('level', $level)
+                ->get();
 
             return view('admin.course_offering.ajax.get_courses_offered', compact(
                 'offerings', 'section_name', 'curriculum_year', 'level', 'period'
