@@ -22,7 +22,7 @@ class SectionSeeder extends Seeder
         \App\CtrSection::create([
             'program_code' => 'BSIT',
             'level' => '1st Year',
-            'section_name' => 'Bock B'
+            'section_name' => 'Block B'
         ]);
 
         \App\CtrSection::create([

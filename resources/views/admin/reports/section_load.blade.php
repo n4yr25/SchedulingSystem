@@ -44,7 +44,7 @@ if(Auth::user()->is_first_login == 1){
                         <select class="form-control select2" id="section">
                             <option>Please Select</option>
                             @foreach($sections as $section)
-                            <option value="{{$section->id}}">{{$section->program_code}}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{{$section->level}}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{{$section->section_name}}</option>
+                            <option value="{{ $section->id}},{{$section->program_code}},{{$section->level}},{{$section->section_name}}">{{$section->program_code}}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{{$section->level}}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{{$section->section_name}}</option>
                             @endforeach
                         </select>
                     </div>

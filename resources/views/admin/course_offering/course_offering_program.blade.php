@@ -43,7 +43,7 @@ if(Auth::user()->is_first_login == 1){
                 <div class="box-body">
                     <div class="form-group">
                         <label>Level</label>
-                        <select class="select2 form-control" onchange="getsections(this.value)">
+                        <select class="select2 form-control" id="clevel" onchange="getsections(this.value)">
                             <option>Please Select</option>
                             <option>1st Year</option>
                             <option>2nd Year</option>
@@ -105,6 +105,7 @@ if(Auth::user()->is_first_login == 1){
     </div>
     <div class="row">
         
+        
         <div class="col-sm-6" id="displayoffered"></div>
         <div class="col-sm-6" id="displaycourses">
             
@@ -126,8 +127,9 @@ if(Auth::user()->is_first_login == 1){
             url: "/ajax/admin/course_offerings/get_sections",
             data: data,
             success: function(response) {
+                
                 $('#displaysections').html(response).fadeIn();
-                $('#displaysearhcourse').fadeIn();
+                $('#displaycourses').fadeIn();
             },
             error: function(xhr, status, error) {
                 toastr.error('Error retrieving sections', 'Notification!');
@@ -167,7 +169,7 @@ if(Auth::user()->is_first_login == 1){
     function searchoffering(cy,level,period,section_name){
         var array = {};
         array['cy'] = cy;
-        array['level'] = level;
+        array['level'] = document.getElementById('clevel').value;
         array['period'] = period;
         array['section_name'] = section_name;
         $.ajax({

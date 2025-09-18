@@ -91,6 +91,7 @@ class ReportController extends Controller
         ->join('curricula', 'curricula.id', '=', 'offerings_infos.curriculum_id')
         ->join('ctr_sections', 'ctr_sections.section_name', '=', 'offerings_infos.section_name')
         ->join('users', 'users.id', '=', 'room_schedules.instructor')
+        ->where('offerings_infos.level', '=', $level)
         ->select(
             'room_schedules.day',
             'room_schedules.time_starts',

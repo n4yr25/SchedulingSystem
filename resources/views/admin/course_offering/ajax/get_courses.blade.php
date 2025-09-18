@@ -49,6 +49,7 @@ function addoffer(course_id){
         array['section_name'] = '{{$section_name}}';
         
         
+        
         $.ajax({
             type: "GET",
             url: "/ajax/admin/course_offerings/add_course_offer",
