@@ -166,7 +166,6 @@
                     {{ $sched->section_name }}<br>
                     {{ $sched->program_code }} - 
                     {{ $sched->course_code }}<br>
-                    {{ $sched->course_name }}<br>
                     {{ $sched->name }} {{ $sched->lastname }}
                 </td>
 

@@ -19,7 +19,7 @@
                     <?php $curriculum = \App\curriculum::find($offering->curriculum_id); ?>
                     @if($curriculum)
                     <tr>
-                        <td>{{$curriculum->id}}</td>
+                        <td>{{$curriculum->course_code}}</td>
                         <td>{{$curriculum->course_name}}</td>
                         <td>{{$curriculum->lec}}</td>
                         <td>{{$curriculum->lab}}</td>
