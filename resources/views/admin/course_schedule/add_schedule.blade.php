@@ -18,7 +18,6 @@ if(Auth::user()->is_first_login == 1){
 @extends($layout)
 
 @section('main-content')
-
 <link rel="stylesheet" href="{{ asset ('plugins/timepicker/bootstrap-timepicker.min.css')}}">
 <link rel="stylesheet" href="{{ asset ('plugins/fullcalendar/fullcalendar.css')}}">
 <section class="content-header">
@@ -240,6 +239,7 @@ function addschedule(day,time_start,time_end){
             success: function(data){
                 $('#displayroom').html(data).fadeIn();
                 $('#myModal').modal('show');
+                $('.select2').select2();
             },
             error: function(xhr, status, error){
                 toastr.error('An error occurred while adding the schedule. Please try again.');

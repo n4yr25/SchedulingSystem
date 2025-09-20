@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
+    <title>Class Schedule - Section</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -78,8 +79,9 @@
           />
         </td>
         <td>
-          <div class="title">SHORTENED CLASS SCHEDULE</div>
-          <div class="subtitle">Pangasinan State University</div>
+          <div class="title">CLASS SCHEDULE</div>
+          <div class="subtitle">PANGASINAN STATE UNIVERSITY</div>
+          <div class="subtitle">Asingan Campus</div>
         </td>
       </tr>
     </table>
@@ -91,7 +93,7 @@
             {{ $semester ? $semester : '' }}, 
             {{ $curriculum_year }} - {{ $curriculum_year + 1 }} / Summer 20__. Asingan Campus
             </br>
-            {{ $section ? $section : '' }}
+            Year/Couse/Section: {{ $level ? $level[0] : '' }} {{ $program ? $program : '' }} - {{ $section ? $section : '' }}
           </span>
         </td>
       </tr>
@@ -163,8 +165,7 @@
                 @endphp
 
                 <td rowspan="{{ $rowspan }}">
-                    Rm. {{ $sched->room }} <br>
-                    {{ $sched->program_code }} - 
+                    {{ $sched->room }} - 
                     {{ $sched->course_code }}<br>
                     {{ $sched->name }} {{ $sched->lastname }}
                 </td>

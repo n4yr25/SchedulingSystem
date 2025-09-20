@@ -18,6 +18,8 @@ if(Auth::user()->is_first_login == 1){
 @extends($layout)
 
 @section('main-content')
+<link rel='stylesheet' href='{{asset('plugins/datatables/jquery.dataTables.css')}}'>
+<link rel='stylesheet' href='{{asset('plugins/datatables/dataTables.bootstrap.css')}}'>
 <link rel='stylesheet' href='{{asset('plugins/select2/select2.css')}}'>
 <section class="content-header">
     <h1><i class="fa  fa-cubes"></i>
@@ -97,8 +99,8 @@ if(Auth::user()->is_first_login == 1){
                     </div>
                 </div>
                 <div class="box-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-striped">
+                    <div class="table-responsive" style="max-height: 500px; overflow-y: auto;">
+                        <table id="sectionsTable" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th width='20%'>Program Code</th>
@@ -147,27 +149,40 @@ if(Auth::user()->is_first_login == 1){
 
 @section('footer-script')
 <script src='{{asset('plugins/select2/select2.js')}}'></script>
+<script src='{{asset('plugins/datatables/jquery.dataTables.js')}}'></script>
+<script src='{{asset('plugins/datatables/dataTables.bootstrap.js')}}'></script>
 <script>
-$('#program_code').on('change',function(){
-    if(this.value!='Please Select'){
-        $('#section_name').val(this.value+'-');
-    }else{
-        $('#section_name').val(' ');
-    }
-})    
-    
-function editsection(section_id){
-    var array = {};
-    array['section_id'] = section_id;
-    $.ajax({
-        type: "GET",
-        url: "/ajax/admin/section_management/edit_section",
-        data: array,
-        success: function(data){
-            $('#displayedit').html(data).fadeIn();
-            $('#myModal').modal('show');
+    $('#program_code').on('change',function(){
+        if(this.value!='Please Select'){
+            $('#section_name').val(this.value+'-');
+        }else{
+            $('#section_name').val(' ');
         }
-    })
-}
+    })    
+    
+    function editsection(section_id){
+        var array = {};
+        array['section_id'] = section_id;
+        $.ajax({
+            type: "GET",
+            url: "/ajax/admin/section_management/edit_section",
+            data: array,
+            success: function(data){
+                $('#displayedit').html(data).fadeIn();
+                $('#myModal').modal('show');
+            }
+        })
+    }
+    $(document).ready(function () {
+        $('#sectionsTable').DataTable({
+            "pageLength": 10,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true
+        });
+    });
 </script>
 @endsection

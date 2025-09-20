@@ -9,7 +9,7 @@ use DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Helper;
-
+use App\InstructorStatus;
 
 class AddNewInstructorController extends Controller
 {
@@ -119,7 +119,16 @@ class AddNewInstructorController extends Controller
 
             return view('reg_college.instructor.view_modify', compact('user_info', 'instructor_info', 'idno'));
         }
-}
+    }
+
+    function setInActive(Request $request) {
+        $instructorStatus = new InstructorStatus();
+        $instructorStatus->instructor_id = $request->instructor_id;
+        $instructorStatus->status = 0;
+        $instructorStatus->save();
+
+        return redirect()->
+    }
 }
 
  

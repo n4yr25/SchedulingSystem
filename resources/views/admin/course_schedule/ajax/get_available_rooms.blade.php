@@ -1,5 +1,5 @@
-  <div class="modal-dialog">
 
+<div class="modal-dialog">
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header bg-danger">
@@ -16,7 +16,7 @@
         <input type="hidden" name="section_name" value="{{$section_name}}">
         <div class='form-group'>
             <label>Available Rooms</label>
-            <select name="room" class='form-control'>
+            <select name="room" class="select2 form-control" style="width:100%;">
                 @foreach($rooms as $room)
                 <option value='{{$room->room}}'>{{$room->room}} {{$room->building}}</option>
                 @endforeach
@@ -24,7 +24,7 @@
         </div>
         <div class='form-group'>
             <label>Instructor</label>
-            <select name="instructor" class='form-control'>
+            <select name="instructor" class="select2 form-control" style="width:100%;">
                 @foreach($instructors as $instructor)
                 <option value='{{$instructor->instructor_id}}'>{{$instructor->name}}&nbsp;{{$instructor->lastname}}</option>
                 @endforeach
@@ -39,5 +39,4 @@
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
-
   </div>

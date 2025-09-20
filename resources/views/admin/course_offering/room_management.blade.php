@@ -18,6 +18,8 @@ if(Auth::user()->is_first_login == 1){
 @extends($layout)
 
 @section('main-content')
+<link rel='stylesheet' href='{{asset('plugins/datatables/jquery.dataTables.css')}}'>
+<link rel='stylesheet' href='{{asset('plugins/datatables/dataTables.bootstrap.css')}}'>
 <section class="content-header">
       <h1><i class="fa fa-bullhorn"></i>
         Room Management
@@ -61,7 +63,7 @@ if(Auth::user()->is_first_login == 1){
                         <input type='text' required class='form-control' name='room'>
                     </div>
                     <div class='form-group'>
-                        <label>Floor</label>
+                        <label>Building</label>
                         <input type='text' required class='form-control' name='building'>
                     </div>
                     <div class='form-group'>
@@ -84,12 +86,12 @@ if(Auth::user()->is_first_login == 1){
                     </div>
                 </div>
                 <div class="box-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-striped">
+                    <div class="table-responsive" style="max-height: 500px; overflow-y: auto;">
+                        <table id="roomsTable" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th width='20%'>Room</th>
-                                    <th width='20%'>Floor</th>
+                                    <th width='20%'>Building</th>
                                     <th width='20%'>Description</th>
                                     <th width='20%'>Status</th>
                                     <th width='20%'>Action</th>
@@ -134,19 +136,35 @@ if(Auth::user()->is_first_login == 1){
 
 @section('footer-script')
 
+@section('footer-script')
+<script src='{{asset('plugins/datatables/jquery.dataTables.js')}}'></script>
+<script src='{{asset('plugins/datatables/dataTables.bootstrap.js')}}'></script>
 <script>
-function editroom(room_id){
-    var array = {};
-    array['room_id'] = room_id;
-    $.ajax({
-        type: "GET",
-        url: "/ajax/admin/room_management/edit_room",
-        data: array,
-        success: function(data){
-            $('#displayedit').html(data).fadeIn();
-            $('#myModal').modal('show');
-        }
-    })
-}
+    function editroom(room_id){
+        var array = {};
+        array['room_id'] = room_id;
+        $.ajax({
+            type: "GET",
+            url: "/ajax/admin/room_management/edit_room",
+            data: array,
+            success: function(data){
+                $('#displayedit').html(data).fadeIn();
+                $('#myModal').modal('show');
+            }
+        })
+    }
+
+    $(document).ready(function () {
+        $('#roomsTable').DataTable({
+            "pageLength": 10,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true
+        });
+    });
+
 </script>
 @endsection

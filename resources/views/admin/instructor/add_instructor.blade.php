@@ -235,7 +235,6 @@ if(Auth::user()->is_first_login == 1){
 
 <script>
 function isUsernameExist() {
-    
     var username = document.getElementById("username").value;
 
     if (username.trim() === "") {

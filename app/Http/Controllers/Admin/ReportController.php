@@ -15,7 +15,7 @@ class ReportController extends Controller
     }
     
     function room_occupied(){
-        $rooms = \App\CtrRoom::all();
+        $rooms = \App\CtrRoom::where('is_active',1)->get();
         return view('admin.reports.room_occupied',compact('rooms'));
     }
     
@@ -103,7 +103,8 @@ class ReportController extends Controller
             'curricula.period',
             'ctr_sections.section_name',
             'users.name',
-            'users.lastname'
+            'users.lastname',
+            'offerings_infos.level'
         )
         ->where('room_schedules.is_active', 1)
         ->where('ctr_sections.id', $room)
@@ -130,7 +131,7 @@ class ReportController extends Controller
             ->latest('created_at')
             ->first();  
       
-        $pdf = PDF::loadView('admin.reports.print_section_occupied',compact('schedules', 'semester', 'room', 'curriculum_year', 'section', 'prepby', 'rec_approval', 'approved', 'conforme'));
+        $pdf = PDF::loadView('admin.reports.print_section_occupied',compact('schedules', 'semester', 'room', 'curriculum_year', 'section', 'level', 'program', 'prepby', 'rec_approval', 'approved', 'conforme'));
         $pdf->setPaper('A4','landscape');
         return $pdf->stream("SectionsOccupied.pdf");
     }

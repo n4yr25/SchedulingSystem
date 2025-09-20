@@ -78,8 +78,9 @@
           />
         </td>
         <td>
-          <div class="title">SHORTENED CLASS SCHEDULE</div>
-          <div class="subtitle">Pangasinan State University</div>
+          <div class="title">CLASS SCHEDULE</div>
+          <div class="subtitle">PANGASINAN STATE UNIVERSITY</div>
+          <div class="subtitle">Asingan Campus</div>
         </td>
       </tr>
     </table>

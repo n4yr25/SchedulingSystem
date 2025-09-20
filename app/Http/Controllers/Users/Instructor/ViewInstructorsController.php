@@ -257,7 +257,6 @@ class ViewInstructorsController extends Controller
         // $exists = User::where('username', 'like', '%' . $username . '%')->exists();
         $exists = User::whereRaw('LOWER(username) = ?', [strtolower($username)])->exists();
 
-
         if ($exists) {
             return true;
         } 

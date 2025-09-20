@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('table_instructor_status', function (Blueprint $table) {
             $table->id();
+            $table->integer('instructor_id')->unsigned();
+            $table->string('status');
             $table->timestamps();
+            $table->foreign("instructor_id")->references("id")
+                ->on("users")->onUpdate("cascade");
         });
     }
 
