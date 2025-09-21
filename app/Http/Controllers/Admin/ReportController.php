@@ -141,10 +141,7 @@ class ReportController extends Controller
         //             ->where('room',$room)->get();
       
 
-        $section = \App\CtrSection::where('id', $room)->get();
-        $program = $section->first()->program_code;
-        $level = $section->first()->level;
-        $section_name = $section->first()->section_name;
+      
 
         // return $program.",".$level.",".$section_name;
             
