@@ -40,7 +40,7 @@ if(Auth::user()->is_first_login == 1){
             <a href="{{ url('admin/database_backup/save') }}" class="btn btn-primary">
                 <i class="fa fa-database"></i> Export Database
             </a>
-        </div>"
+        </div>
        
         <div class="box-body">
             <div class="table-responsive" id="reloadtabular">
@@ -59,9 +59,16 @@ if(Auth::user()->is_first_login == 1){
                             <td>{{$savedb['filename']}}</td>
                             <td>{{ \Carbon\Carbon::parse($savedb['created_at'])->format('Y-m-d') }}</td>
                             <td>
+
                                 <a href="{{ url('admin/database_backup/download', $savedb['id']) }}" class="btn btn-primary btn-xs">
                                     <i class="fa fa-download"></i>
                                 </a>
+                                <form action="{{ url('admin/database_backup/restore', $savedb['id']) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    <button type="submit" class="btn btn-success btn-xs" onclick="return confirm('Are you sure you want to restore this backup? This will overwrite current data.')">
+                                        <i class="fa fa-history"></i>
+                                    </button>
+                                </form>
                                 <form action="{{ url('admin/database_backup/delete', $savedb['id']) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
@@ -108,5 +115,16 @@ if(Auth::user()->is_first_login == 1){
             }
         })
     }
+     @if(session('success'))
+        toastr.success("{{ session('success') }}", "Success!");
+    @endif
+
+    @if(session('error'))
+        toastr.error("{{ session('error') }}", "Error!");
+    @endif
+
+    @if(session('info'))
+        toastr.info("{{ session('info') }}", "Info!");
+    @endif
 </script>
 @endsection

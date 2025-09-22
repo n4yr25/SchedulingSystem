@@ -37,6 +37,29 @@ class DatabaseBackupController extends Controller
         return back()->with('error', 'Backup file not found.');
     }
 
+    public function restore($id)
+    {
+        $backup = Database_Backup::findOrFail($id);
+
+        if (!file_exists($backup->path)) {
+            return back()->with('error', 'Backup file not found.');
+        }
+
+        try {
+            // Use Artisan command to restore database
+            // Note: Make sure you have a custom command like 'db:restore {path}' implemented
+            Artisan::call('db:restore', [
+                'path' => $backup->path
+            ]);
+
+            return back()->with('success', 'Database restored successfully!');
+
+        } catch (\Exception $e) {
+            return back()->with('error', 'Failed to restore database: ' . $e->getMessage());
+        }
+    }
+
+
     // Delete backup file + record
     public function destroy($id)
     {
