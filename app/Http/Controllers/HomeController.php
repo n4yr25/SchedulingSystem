@@ -37,11 +37,26 @@ class HomeController extends Controller
     public function index()
     {
         $role = Auth::user()->accesslevel;
+
+        $availableRooms = \App\CtrRoom::where('is_active', 1)->count();
+        $totalRooms = \App\CtrRoom::count();
+        $totalSections = \App\CtrSection::count();
+        $programs = \App\academic_programs::distinct()->get(['program_code','program_name']);
+
+        $teachingInstructorsCount = \App\instructors_infos::join('room_schedules', 'room_schedules.instructor', '=', 'instructors_infos.instructor_id')
+            ->distinct('instructors_infos.instructor_id')
+            ->count();
+        $teachingInstructors = \App\instructors_infos::join('room_schedules', 'room_schedules.instructor', '=', 'instructors_infos.instructor_id')
+            ->join('users', 'users.id', '=', 'instructors_infos.instructor_id')
+            ->distinct('instructors_infos.instructor_id')
+            ->get(['users.name', 'users.lastname', 'instructors_infos.college', 'instructors_infos.employee_type']);
+    
+
         if ($role == 0) {
             if (Auth::user()->is_first_login == 1) {
                 return view('instructor.first_login');
             } else {
-                return view('admin.dashboard');
+                return view('admin.dashboard', compact('availableRooms', 'totalRooms', 'totalSections', 'teachingInstructorsCount', 'teachingInstructors', 'programs'));
             }
         } elseif ($role == 1) {
             if (Auth::user()->is_first_login == 1) {
