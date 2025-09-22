@@ -46,7 +46,7 @@
             </div>
             <div class="col-md-3">
               <label for="recommending_approval_signature">Signature <i>(.png file only)</i></label>
-              <input id="recommending_approval_signature" name="recommending_approval_signature" type="file" class="form-control" value="{{ $prepby ? $prepby->position : ''  }}">
+              <input id="recommending_approval_signature" name="recommending_approval_signature" type="file" class="form-control" value="{{ $rec_approval ? $rec_approval->position : ''  }}">
             </div>
             <div class="col-md-2">
               <label>&nbsp;</label> <!-- Keeps height consistent -->
@@ -68,7 +68,7 @@
             </div>
             <div class="col-md-3">
               <label for="approved_signature">Signature <i>(.png file only)</i></label>
-              <input id="approved_signature" name="approved_signature" type="file" class="form-control" value="{{ $prepby ? $prepby->position : ''  }}">
+              <input id="approved_signature" name="approved_signature" type="file" class="form-control" value="{{ $approved ? $approved->position : ''  }}">
             </div>
             <div class="col-md-2">
               <label>&nbsp;</label> <!-- Keeps height consistent -->
@@ -90,7 +90,7 @@
             </div>
             <div class="col-md-3">
               <label for="conforme_signature">Signature <i>(.png file only)</i></label>
-              <input id="conforme_signature" name="conforme_signature" type="file" class="form-control" value="{{ $prepby ? $prepby->position : ''  }}">
+              <input id="conforme_signature" name="conforme_signature" type="file" class="form-control" value="{{ $conforme ? $conforme->position : ''  }}">
             </div>
             <div class="col-md-2">
               <label>&nbsp;</label> <!-- Keeps height consistent -->
