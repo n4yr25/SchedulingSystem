@@ -90,7 +90,8 @@ class CourseOfferingAjax extends Controller
             $section_name = $request->input('section_name');
 
             $offerings = offerings_infos_table::where('section_name', $section_name)
-                ->where('level', $level)
+                ->join('curricula', 'curricula.id', '=', 'offerings_infos.curriculum_id')
+                ->where('offerings_infos.level', $level)
                 ->get();
 
             return view('admin.course_offering.ajax.get_courses_offered', compact(

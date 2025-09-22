@@ -11,6 +11,7 @@
                         <th>Lec</th>
                         <th>Lab</th>
                         <th>Units</th>
+                        <th>Semester</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -24,6 +25,7 @@
                         <td>{{$curriculum->lec}}</td>
                         <td>{{$curriculum->lab}}</td>
                         <td>{{$curriculum->units}}</td>
+                        <td>{{$curriculum->period}}</td>
                         <td class="text-center"><button  onclick="removeoffer('{{$curriculum->id}}','{{$section_name}}')" class="btn btn-danger btn-flat"><i class="fa fa-times"></i></button></td>
                     </tr>
                     @endif

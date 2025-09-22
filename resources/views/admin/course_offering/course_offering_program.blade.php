@@ -53,7 +53,6 @@ if(Auth::user()->is_first_login == 1){
                     </div>
                     <div class="form-group" id="displaysections">
                     </div>
-                    
                 </div>
             </div>
         </div>
