@@ -89,7 +89,7 @@ public function updateapproved(Request $request)
 {
     $approved = $request->input('approved');
     $approved_position = $request->input('approved_position');
-    $signaturePath = null;
+    $signaturePath = "";
 
     if ($request->hasFile('approved_signature')) {
         $file = $request->file('approved_signature');
