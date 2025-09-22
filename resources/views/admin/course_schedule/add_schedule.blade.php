@@ -257,9 +257,9 @@ $('#calendar').fullCalendar({
     firstDay: 1,
     columnFormat: 'ddd',
     defaultView: 'agendaWeek',
-    hiddenDays: [0],
-    minTime: '07:00:00',
-    maxTime: '20:00:00',
+    hiddenDays: [0,6],
+    minTime: '08:00:00',
+    maxTime: '18:00:00',
     header: false,
     //// uncomment this line to hide the all-day slot
     allDaySlot: false,
@@ -267,12 +267,14 @@ $('#calendar').fullCalendar({
      eventRender: function(event, element) {
         element.find('div.fc-title').html(element.find('div.fc-title').text()) ;
      },
-    // eventClick: function(event){
-    //     var boolean = confirm('Clicking the OK button button will change the status of the schedule. Do you wish to continue?');
-    //     if(boolean == true){
-    //         window.open('/admin/course_scheduling/remove_schedule/'+event.id+'/'+event.offering_id,'_self');
-    //     }
-    // }
+    eventClick: function(event){
+        console.log(event);
+        
+        var boolean = confirm('Clicking the OK button button will change the status of the schedule. Do you wish to continue?');
+        if(boolean == true){
+            window.open('/admin/course_scheduling/remove_schedule/'+event.id+'/'+event.offering_id,'_self');
+        }
+    }
  });
 </script>
 @endsection

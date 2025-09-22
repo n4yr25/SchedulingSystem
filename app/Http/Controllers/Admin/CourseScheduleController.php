@@ -38,7 +38,15 @@ class CourseScheduleController extends Controller
     public static function getSchedule($offering_id){
         $event_array = array();
         $schedules = \App\room_schedules::where('offering_id',$offering_id)
-            ->join('users','users.id','room_schedules.instructor')->get();
+            ->join('users','users.id','room_schedules.instructor')
+            ->where('room_schedules.is_active',1)
+            ->get([
+                'room_schedules.id AS id',
+                'room_schedules.day AS day',
+                'room_schedules.time_starts AS time_starts',
+                'room_schedules.time_end AS time_end',
+                'room_schedules.room AS room',
+            ]);
         if(!$schedules->isEmpty()){
             foreach($schedules as $sched){
                 $course_detail = \App\curriculum::join('offerings_infos','offerings_infos.curriculum_id','curricula.id')
@@ -146,7 +154,6 @@ class CourseScheduleController extends Controller
     
     function delete_schedule($schedule_id,$offering_id){
         
-            
             $offering = \App\offerings_infos_table::find($offering_id);
             
             $schedule = \App\room_schedules::find($schedule_id);
