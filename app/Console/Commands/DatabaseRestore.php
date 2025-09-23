@@ -30,7 +30,8 @@ class DatabaseRestore extends Command
         $dbPass = env('DB_PASSWORD', '');
 
         // Path to mysql.exe (adjust if using Laragon)
-        $mysqlPath = "C:\\laragon\\bin\\mysql\\mysql-8.4.3-winx64\\bin\\mysql.exe";
+        $mysqlPath = "C:\\xampp\\mysql\\bin\\mysql.exe";
+        // $mysqlPath = "C:\\laragon\\bin\\mysql\\mysql-8.4.3-winx64\\bin\\mysql.exe";
 
         // Construct the restore command
         $command = "\"$mysqlPath\" -h $dbHost -P $dbPort -u $dbUser " . ($dbPass ? "-p\"$dbPass\"" : "") . " $dbName < \"$path\"";

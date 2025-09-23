@@ -43,8 +43,8 @@ class DatabaseBackup extends Command
         $filePath = $storagePath . '/' . $filename;
 
         // ✅ Use the full path to mysqldump
-        // $dumpPath = "C:\\xampp\\mysql\\bin\\mysqldump.exe";
-        $dumpPath = "C:\\laragon\\bin\\mysql\\mysql-8.4.3-winx64\\bin\\mysqldump.exe";
+        $dumpPath = "C:\\xampp\\mysql\\bin\\mysqldump.exe";
+        // $dumpPath = "C:\\laragon\\bin\\mysql\\mysql-8.4.3-winx64\\bin\\mysqldump.exe";
 
         // Handle empty password case
         if ($password) {
