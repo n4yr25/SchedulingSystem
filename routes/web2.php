@@ -68,6 +68,7 @@ Route::get('/ajax/instructor/reloadcalendar','Instructor\Ajax\FacultyLoadingAjax
 Route::get('/ajax/curriculum_management/edit_modal','Admin\Ajax\CourseOfferingAjax@edit_modal');
 Route::post('/curriculum_management/edit_curriculum','Admin\CurriculumController@edit_curriculum');
 
+
 Route::post('/default/change_password','HomeController@default_pass');
 Route::get('/403',function(){
     return view('adminlte::errors.404');

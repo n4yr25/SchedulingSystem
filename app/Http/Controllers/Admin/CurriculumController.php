@@ -10,6 +10,7 @@ use PDF;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Helper;
+use Exception;
 use Illuminate\Support\Facades\Redirect;
 
 class CurriculumController extends Controller {     
@@ -125,29 +126,49 @@ class CurriculumController extends Controller {
     
     function post_prerequisites(Request $request){
         
-            $check_if_exists = \App\Prerequisite::where('Curriculum_year',$request->curriculum_year)
-                    ->where('Course_Code',$request->program_code)
-                    ->where('Subject_Code',$request->course_code)
-                    ->where('Prerequisite',$request->prerequisite)->get();
-            
-            if(count($check_if_exists)==0){
-                $new =  new \App\Prerequisite;
-                $new->Course_Code = $request->program_code;
-                $new->Course = \App\CtrAcademicProgram::where('program_code',$request->program_code)->first()->program_name;
-                $new->Subject_Code = $request->course_code;
-                $new->Prerequisite = $request->prerequisite;
-                $new->Curriculum_year = $request->curriculum_year;
-                $new->save();
-                
-                Helper::addLogs(Helper::getName(Auth::user()->idno).' added a prerequisite subject');
-                Log::info(Helper::getName(Auth::user()->idno).' added a prerequisite subject');
-                Session::flash('success','Added Prerequisite');
-                return redirect(url('/registrar_college/curriculum_management/prerequisites'));
-            }else{
-                Session::flash('error','Prerequisite Already Exists!');
-                return Redirect::back();
-            }
+        $check_if_exists = \App\Prerequisite::where('Curriculum_year',$request->curriculum_year)
+                ->where('Course_Code',$request->program_code)
+                ->where('Subject_Code',$request->course_code)
+                ->where('Prerequisite',$request->prerequisite)->get();
+        
+        if(count($check_if_exists)==0){
+        $new =  new \App\Prerequisite;
+        $new->Course_Code = $request->program_code;
+        $new->Course = \App\CtrAcademicProgram::where('program_code',$request->program_code)->first()->program_name;
+        $new->Subject_Code = $request->course_code;
+        $new->Prerequisite = $request->prerequisite;
+        $new->Curriculum_year = $request->curriculum_year;
+        $new->save();
+        
+        Helper::addLogs(Helper::getName(Auth::user()->idno).' added a prerequisite subject');
+        Log::info(Helper::getName(Auth::user()->idno).' added a prerequisite subject');
+        Session::flash('success','Added Prerequisite');
+        return redirect(url('/registrar_college/curriculum_management/prerequisites'));
+        }else{
+        Session::flash('error','Prerequisite Already Exists!');
+        return Redirect::back();
+        }
+        
         
     }
+        public function remove_curricula(Request $request){
+                  $curriculum = \App\curriculum::find($request->curriculum_id);
+                $curriculum->course_code = $request->course_code;
+                $curriculum->course_name = $request->course_name;
+                $curriculum->lec = $request->lec;
+                $curriculum->lab = $request->lab;
+                $curriculum->units = $request->units;
+                $curriculum->is_complab = $request->complab;
+              try {
+                
+                $curriculum->delete();
+                
+                Session::flash('success','Successfully deleted '.$request->course_code);
+                return redirect(url('/admin/curriculum_management/list_curriculum',array($curriculum->program_code,$curriculum->curriculum_year)));rect(url('/admin/curriculum_management/list_curriculum',array($program_name,$curriculum->curriculum_year)));
+              } catch(Exception $e) {
+                Session::flash('success','Unable to delete!');
+                return redirect(url('/admin/curriculum_management/list_curriculum',array($curriculum->program_code,$curriculum->curriculum_year)));rect(url('/admin/curriculum_management/list_curriculum',array($program_name,$curriculum->curriculum_year)));
+              }
+        }
 
 }

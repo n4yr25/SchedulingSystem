@@ -31,6 +31,7 @@
     //curriculum management
     Route::get('/admin/curiculum_management/curriculum', 'Admin\CurriculumController@index');
     Route::get('/admin/curriculum_management/view_curriculums/{program_code}', 'Admin\CurriculumController@viewcurricula');
+    Route::post('/admin/curriculum_management/remove_curricula', 'Admin\CurriculumController@remove_curricula');
     Route::get('/admin/curriculum_management/list_curriculum/{program_code}/{curriculum_year}', 'Admin\CurriculumController@listcurriculum');
 
     //add curriculum
