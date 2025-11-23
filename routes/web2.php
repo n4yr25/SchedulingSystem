@@ -64,6 +64,7 @@ Route::get('/ajax/instructor/accept_load','Instructor\Ajax\FacultyLoadingAjax@ac
 Route::get('/ajax/instructor/reject_offer','Instructor\Ajax\FacultyLoadingAjax@reject_offer');
 Route::get('/ajax/instructor/reloadtabular','Instructor\Ajax\FacultyLoadingAjax@reloadtabular');
 Route::get('/ajax/instructor/reloadcalendar','Instructor\Ajax\FacultyLoadingAjax@reloadcalendar');
+Route::get('/ajax/instructor/print-schedule/{id}', 'Instructor\Ajax\FacultyLoadingAjax@print_schedule');
 
 Route::get('/ajax/curriculum_management/edit_modal','Admin\Ajax\CourseOfferingAjax@edit_modal');
 Route::post('/curriculum_management/edit_curriculum','Admin\CurriculumController@edit_curriculum');

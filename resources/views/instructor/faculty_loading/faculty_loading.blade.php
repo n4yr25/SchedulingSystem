@@ -24,7 +24,7 @@ $tabular_schedules = \App\room_schedules::distinct()->
 <div class="container-fluid" style="margin-top:20px;">
     <div class="row">
         <div class="col-sm-3">
-            <div class="box box-default">
+            {{-- <div class="box box-default">
                 <div class="box-body no-padding">
                     <table class="table table-borderless table-condensed">
                         <tr>
@@ -38,7 +38,7 @@ $tabular_schedules = \App\room_schedules::distinct()->
                         </tr>
                     </table>
                 </div>
-            </div>
+            </div> --}}
             <div class="box box-danger box-solid">
                 <div class="box box-body">
                     <div class="table-responsive" id="reloadtabular">
@@ -106,6 +106,11 @@ $tabular_schedules = \App\room_schedules::distinct()->
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#tab_1" data-toggle="tab">Calendar View</a></li>
                     <li><a href="#tab_2" data-toggle="tab">Tabular View</a></li>
+                     <li class="pull-right">
+                        <div class="box-tools pull-right">
+                            <a href="{{ url('/ajax/instructor/print-schedule', Auth::user()->id) }}" target="_blank" class="btn btn-flat btn-primary"><i class="fa fa-print"></i> Generate PDF</a>
+                        </div>
+                    </li>
                     <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
                 </ul>
                 <div class="tab-content">

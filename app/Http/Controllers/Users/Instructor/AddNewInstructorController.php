@@ -115,7 +115,8 @@ class AddNewInstructorController extends Controller
     function view_modify($idno) {
         if (Auth::user()->accesslevel == env('REG_COLLEGE') || Auth::user()->accesslevel == env("DEAN")) {
             $user_info = \App\User::where('idno', $idno)->first();
-            $instructor_info = \App\InstructorsInfo::where('idno', $idno)->first();
+            $instructor_info = \App\InstructorsInfo::where('idno', $idno)
+                ->first();
 
             return view('reg_college.instructor.view_modify', compact('user_info', 'instructor_info', 'idno'));
         }
@@ -127,7 +128,7 @@ class AddNewInstructorController extends Controller
         $instructorStatus->status = 0;
         $instructorStatus->save();
 
-        return redirect()->
+        return redirect()-
     }
 }
 

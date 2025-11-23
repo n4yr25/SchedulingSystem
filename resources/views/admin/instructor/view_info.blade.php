@@ -185,20 +185,26 @@ if(Auth::user()->is_first_login == 1){
                         </div>
                         <div class="col-sm-4">
                             <label><b>Employee Status</b></label>
-                            <select name="employee_type" class="select2 form form-control">
-                                <option value="">Select Employee Type</option>
-                                <option @if($info->employee_type == 'Full Time') selected='selected' @endif value="Full Time">Full Time</option>
-                                <option @if($info->employee_type == 'Part Time') selected='selected' @endif value="Part Time">Part Time</option>
-                                @if (isset($info->employee_type))
-                                    <option @if($info->employee_type == 'Inactive') selected='selected' @endif value="Inactive">Inactive</option> 
-                                @endif
-                            </select>
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <select name="employee_type" class="select2 form form-control">
+                                        <option value="">Select Employee Type</option>
+                                        <option @if($info->employee_type == 'Full Time') selected='selected' @endif value="Full Time">Full Time</option>
+                                        <option @if($info->employee_type == 'Part Time') selected='selected' @endif value="Part Time">Part Time</option>
+
+                                        @if (isset($info->employee_type))
+                                            <option @if($info->employee_type == 'Inactive') selected='selected' @endif value="Inactive">Inactive</option>
+                                        @endif
+                                    </select>
+                                </div>
+                                <div class="col-md-6 d-flex">
+                                    <p class="ml-0 fw-bold">Available Units: {{ !empty($units) ? $units : 0 }}</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                            
                 </div>
             </div>
-            
             <div class='form form-group'>
                 <div class='col-sm-12'>
                     <input type='submit' class='col-sm-12 btn btn-primary' value='Update'>

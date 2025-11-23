@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Input;
 Use Illuminate\Support\Facades\DB;
 use Request;
 use App\Events\LoadingNotification;
+use PDF;
 
 class FacultyLoadingAjax extends Controller
 {
@@ -132,5 +133,41 @@ class FacultyLoadingAjax extends Controller
         }
         
         return $get_schedule;
+    }
+
+    public function print_schedule($id){
+           $schedules = \App\room_schedules::join('offerings_infos', 'offerings_infos.id', '=', 'room_schedules.offering_id')
+                    ->join('curricula', 'curricula.id', '=', 'offerings_infos.curriculum_id')
+                    ->join('users', 'users.id', '=', 'room_schedules.instructor')
+                    ->distinct()->where('is_active',1)
+                    ->where('instructor',$id)   
+                    ->get();
+
+        $section = $schedules->first()->section_nae;
+        $semester = $schedules->first()->period;
+        $curriculum_year = $schedules->first()->curriculum_year;
+        $faculty = $schedules->first()->name . " " . $schedules->first()->lastname;
+
+        $prepby = \App\Signatories::select('fullname', 'position', 'signature_path')
+            ->where('role', 1)
+            ->latest('created_at')
+            ->first();
+        $rec_approval = \App\Signatories::select('fullname', 'position', 'signature_path')
+            ->where('role', 2)
+            ->latest('created_at')
+            ->first();
+        $approved = \App\Signatories::select('fullname', 'position', 'signature_path')
+            ->where('role', 3)
+            ->latest('created_at')
+            ->first();
+        $conforme = \App\Signatories::select('fullname', 'position', 'signature_path')
+            ->where('role', 4)
+            ->latest('created_at')
+            ->first();  
+
+        // return $schedules;
+        $pdf = PDF::loadView('Instructor.print_instructor_occupied',compact('schedules', 'curriculum_year', 'section', 'semester', 'faculty', 'prepby', 'rec_approval', 'approved', 'conforme'));
+        $pdf->setPaper('A4','landscape');
+        return $pdf->stream("SectionsOccupied.pdf");
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Users\Instructor;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\room_schedules;
 use App\User;
 use DB;
 use Illuminate\Support\Facades\Session;
@@ -33,15 +34,19 @@ class ViewInstructorsController extends Controller
     }
     
     function view_info($id){
-       
-            $user = \App\User::find($id);
-            $info = \App\instructors_infos::where('instructor_id',$id)->first();
-            return view('/admin/instructor/view_info',compact('user','info'));
-        
+        $user = \App\User::find($id);
+        $info = \App\instructors_infos::where('instructor_id',$id)->first();
+        $units = \App\UnitsLoad::where('instructor_id', $id)->first();
+        $schedules = \App\room_schedules::where('instructor', $id)->get();
+        $units = 36;
+        foreach($schedules as $sched) {
+            $hours = (int)$sched->time_end - (int)$sched->time_starts;
+            $units -= $hours;
+        }
+        return view('/admin/instructor/view_info',compact('user','info', 'units'));
     }
 
     function add(Request $request) {
-        
            $this->create_new_instructor($request);
            Session::flash('success','Instructor Added!');
            return redirect(url('/admin/instructor/add_instructor'));

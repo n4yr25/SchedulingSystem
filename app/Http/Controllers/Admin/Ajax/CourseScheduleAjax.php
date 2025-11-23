@@ -56,49 +56,46 @@ class CourseScheduleAjax extends Controller
     }
     
     public function get_rooms_available(Request $request)
-{
-    if ($request->ajax()) {
-        $day = $request->input('day');
-        $time_start = $request->input('time_start');
-        $time_end = $request->input('time_end');
-        $offering_id = $request->input('offering_id');
-        $section_name = $request->input('section_name');
+    {
+        if ($request->ajax()) {
+            $day = $request->input('day');
+            $time_start = $request->input('time_start');
+            $time_end = $request->input('time_end');
+            $offering_id = $request->input('offering_id');
+            $section_name = $request->input('section_name');
 
-        // Parse times to proper format
-        $start = date("H:i:s", strtotime($time_start));
-        $end   = date("H:i:s", strtotime($time_end));
+            // Parse times to proper format
+            $start = date("H:i:s", strtotime($time_start));
+            $end   = date("H:i:s", strtotime($time_end));
 
-        // Find conflicting room schedules (overlap check)
-        $conflict_schedules = room_schedules::join('offerings_infos', 'offerings_infos.id', '=', 'room_schedules.offering_id')
-            ->where('room_schedules.day', $day)
-            ->where(function ($query) use ($start, $end) {
-                $query->where('room_schedules.time_starts', '<', $end)   // existing start < new end
-                      ->where('room_schedules.time_end', '>', $start);  // existing end > new start
-            })
-            ->get();
-
-        $instructors = instructors_infos::join('users', 'users.id', '=', 'instructors_infos.instructor_id')
-            ->where('instructors_infos.employee_type', '!=', 'Inactive')
-            ->get(['instructors_infos.instructor_id', 'users.name', 'users.lastname']);
-
-        // Filter available rooms
-        if ($conflict_schedules->isNotEmpty()) {
-            $conflicting_rooms = $conflict_schedules->pluck('room')->unique()->toArray();
-
-            $rooms = CtrRoom::where('is_active', 1)
-                ->whereNotIn('room', $conflicting_rooms)
+            // Find conflicting room schedules (overlap check)
+            $conflict_schedules = room_schedules::join('offerings_infos', 'offerings_infos.id', '=', 'room_schedules.offering_id')
+                ->where('room_schedules.day', $day)
+                ->where(function ($query) use ($start, $end) {
+                    $query->where('room_schedules.time_starts', '<', $end)   // existing start < new end
+                        ->where('room_schedules.time_end', '>', $start);  // existing end > new start
+                })
                 ->get();
-        } else {
-            $rooms = CtrRoom::where('is_active', 1)->get();
+
+            $instructors = instructors_infos::join('users', 'users.id', '=', 'instructors_infos.instructor_id')
+                ->where('instructors_infos.employee_type', '!=', 'Inactive')
+                ->get(['instructors_infos.instructor_id', 'users.name', 'users.lastname']);
+
+            // Filter available rooms
+            if ($conflict_schedules->isNotEmpty()) {
+                $conflicting_rooms = $conflict_schedules->pluck('room')->unique()->toArray();
+
+                $rooms = CtrRoom::where('is_active', 1)
+                    ->whereNotIn('room', $conflicting_rooms)
+                    ->get();
+            } else {
+                $rooms = CtrRoom::where('is_active', 1)->get();
+            }
+
+            return view('admin.course_schedule.ajax.get_available_rooms', compact(
+                'rooms', 'offering_id', 'day', 'time_start', 'time_end', 'section_name', 'instructors'
+            ))->render();
         }
-
-        return view('admin.course_schedule.ajax.get_available_rooms', compact(
-            'rooms', 'offering_id', 'day', 'time_start', 'time_end', 'section_name', 'instructors'
-        ))->render();
-    }
-
-
-
         return response()->json(['message' => 'Invalid request'], 400);
     }
     

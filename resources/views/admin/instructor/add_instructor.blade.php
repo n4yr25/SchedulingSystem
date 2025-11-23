@@ -193,6 +193,10 @@ if(Auth::user()->is_first_login == 1){
                             <option value="Part Time">Part Time</option>
                         </select>
                     </div>
+                    {{-- <div class="col-sm-4">
+                        <label><b>Units</b><span style="color:red; margin-left: 2px;">*</span></label>
+                        <input class="form form-control" name='units' placeholder='Units' value="{{old('units')}}" type="number" required>
+                    </div> --}}
                 </div>
             </div>
                     
