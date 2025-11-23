@@ -77,7 +77,7 @@
             body{background-color:#ff3300;}
         </style>
     </head>
-    <body class="hold-transition login-page" style="background:#252525;">
+    <body class="hold-transition login-page" style="background-image: url('images/login-cover.jpg')">
         <div class="container-fluid header">    
             <div class="col-md-1 pull-left"><img class="image img-responsive logo" src="{{ asset('logo/logo.png') }}"></div>
             <div class="col-md-8"><span class="schoolname">Pangasinan State University</span>
@@ -91,7 +91,7 @@
     <div id="app">
         <div class="login-box">
             <div class="login-logo">
-                <a style="color:white;" href="{{ url('/home') }}"><i class="fa fa-safari"></i> <b>LOG</b>IN</a>
+                <a style="color:white;" href="{{ url('/home') }}"><i class="fa fa-safari"></i> <b>LOG IN</b></a>
             </div><!-- /.login-logo -->
 
         @if (count($errors) > 0)
