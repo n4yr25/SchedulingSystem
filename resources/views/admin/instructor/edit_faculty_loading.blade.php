@@ -149,14 +149,16 @@ $('#signatories').on('click', function() {
     });
 });
 
-$('#calendar').fullCalendar({
+$('#calendar').fullCalendar({    
 header: false,
-        hiddenDays: [0],
+        hiddenDays: [0,6],
         firstDay: 1,
         height: 650,
         allDaySlot: false,
         columnFormat: 'ddd',
         defaultView: 'agendaWeek',
+        minTime: "07:00:00",   // Start at 7 AM
+maxTime: "18:00:00", 
         eventSources: [<?php echo "$schedules"; ?>],
         eventRender: function(event, element) {
         element.find('div.fc-title').html(element.find('div.fc-title').text());

@@ -48,7 +48,7 @@
             <div>
                 <h6 class="text-2xl font-semibold opacity-90">Instructors</h6>
                 <h3 class="mt-4 text-6xl font-extrabold">{{ $teachingInstructorsCount }}</h3>
-                <p class="mt-5 text-xl font-medium opacity-90">Currently Teaching</p>
+                <p class="mt-5 text-xl font-medium opacity-90">Faculty Workload</p>
             </div>
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 opacity-80" fill="none" viewBox="0 0 24 24" stroke="currentColor">

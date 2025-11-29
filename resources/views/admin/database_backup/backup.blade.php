@@ -38,8 +38,19 @@ if(Auth::user()->is_first_login == 1){
     <div class="box box-default">
         <div class="box-header with-border">
             <a href="{{ url('admin/database_backup/save') }}" class="btn btn-primary">
-                <i class="fa fa-database"></i> Export Database
+                <i class="fa fa-upload"></i> Export
             </a>
+
+            <form action="{{ url('admin/database_backup/import') }}" 
+                method="POST" 
+                enctype="multipart/form-data" 
+                style="display:inline;">
+                @csrf
+                <label class="btn btn-warning text-white mb-0">
+                    <i class="fa fa-download"></i> Import
+                    <input type="file" name="import_file" style="display:none;" onchange="this.form.submit()">
+                </label>
+            </form>
         </div>
        
         <div class="box-body">

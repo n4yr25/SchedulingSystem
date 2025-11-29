@@ -31,6 +31,7 @@ class FacultyLoadingController extends Controller
     
     function instructorlist_reports($instructor){
         $schedules = $this->getFullCalendar($instructor);
+        // return $schedules;
         return view('admin.instructor.edit_faculty_loading',compact('schedules','instructor'));
     }
     

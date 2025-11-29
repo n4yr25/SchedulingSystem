@@ -51,7 +51,7 @@ $programs = \App\academic_programs::distinct()->orderBy('program_code')->get(arr
                     <thead>
                         <tr>
                             <th>Action</th>
-                            <th>Curriculum Year</th>
+                            <th>Academic Year</th>
                             <th width="15%">Period</th>
                             <th width="12%">Level</th>
                             <th width="12%">Program Code</th>

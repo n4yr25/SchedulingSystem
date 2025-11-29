@@ -26,7 +26,7 @@
                         <td>{{$curriculum->lab}}</td>
                         <td>{{$curriculum->units}}</td>
                         <td>{{$curriculum->period}}</td>
-                        <td class="text-center"><button  onclick="removeoffer('{{$curriculum->id}}','{{$section_name}}')" class="btn btn-danger btn-flat"><i class="fa fa-times"></i></button></td>
+                        <td class="text-center"><button  onclick="removeoffer('{{$curriculum->id}}','{{$section_name}}')" class="btn btn-danger btn-flat"><i class="fa fa-arrow-right"></i></button></td>
                     </tr>
                     @endif
                     @endforeach

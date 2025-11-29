@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\offerings_infos_table;
 use Auth;
 use Illuminate\Support\Facades\Session;
 use DB;
@@ -89,39 +90,42 @@ class CourseScheduleController extends Controller
     
     function add_schedule_post(Request $request){
         
-            $offering_id = $request->offering_id;
-            $day = $request->day;
-            $time_start = $request->time_start;
-            $time_end = $request->time_end;
-            $section_name = $request->section_name;
-            $instructor_id = $request->instructor;
-            
-            $same_sched = DB::table('offerings_infos')
-                    ->join('room_schedules','offerings_infos.id','room_schedules.offering_id')
-                    ->where('offerings_infos.section_name',$request->section_name)
-                    ->where('room_schedules.day',$request->day)
-                    ->where('room_schedules.time_starts',date('H:i:s',strtotime($time_start)))
-                    ->where('room_schedules.time_end',date('H:i:s',strtotime($time_end)))
-                    ->get();
-            
-            if(count($same_sched)==0){
-                $new_schedule = new \App\room_schedules;
-                $new_schedule->day = $day;
-                $new_schedule->time_starts = date('H:i:s',strtotime($time_start));
-                $new_schedule->time_end = date('H:i:s',strtotime($time_end));
-                $new_schedule->room = $request->room;
-                $new_schedule->instructor = $instructor_id;
-                $new_schedule->offering_id = $offering_id;
-                $new_schedule->save();
-
-                Session::flash('success','Successfully in creating a schedule!');
-                return redirect(url('/admin/course_scheduling/schedule',array($offering_id,$section_name)));
-            }else{
-                Session::flash('error','Same Schedule Found!');
-                return redirect(url('/admin/course_scheduling/schedule',array($offering_id,$section_name)));
-            }
-            
+        $offering_id = $request->offering_id;
+        $day = $request->day;
+        $time_start = $request->time_start;
+        $time_end = $request->time_end;
+        $section_name = $request->section_name;
+        $instructor_id = $request->instructor;
         
+        $same_sched = \App\offerings_infos_table::
+            join('room_schedules','offerings_infos.id','room_schedules.offering_id')
+            ->where('offerings_infos.section_name',$request->section_name)
+            ->where('room_schedules.day',$request->day)
+            ->where('room_schedules.time_starts',date('H:i:s',strtotime($time_start)))
+            ->where('room_schedules.time_end',date('H:i:s',strtotime($time_end)))
+            ->get();
+        // return $same_sched;
+        if(count($same_sched)==0){
+            $new_schedule = new \App\room_schedules;
+            $new_schedule->day = $day;
+            $new_schedule->time_starts = date('H:i:s',strtotime($time_start));
+            $new_schedule->time_end = date('H:i:s',strtotime($time_end));
+            $new_schedule->room = $request->room;
+            $new_schedule->instructor = $instructor_id;
+            $new_schedule->offering_id = $offering_id;
+            $new_schedule->save();
+
+            Session::flash('success','Successfully in creating a schedule!');
+            return redirect(url('/admin/course_scheduling/schedule',array($offering_id,$section_name)));
+        }else{
+            $conflicts = \App\offerings_infos_table::join('curricula','offerings_infos.curriculum_id', '=', 'curricula.id')
+                ->join('room_schedules', 'offerings_infos.id', '=', 'room_schedules.offering_id')
+                ->get();
+
+            // Session::flash('error',"Same Schedule Found. $conflicts->level-$conflicts->section_name { $conflicts->time_starts-$conflicts->time_end } $conflicts->day");
+            Session::flash('error',"Same schedule found in other Section.");
+            return redirect(url('/admin/course_scheduling/schedule',array($offering_id,$section_name)));
+        }
     }
     
     function remove_schedule($schedule_id,$offering_id){

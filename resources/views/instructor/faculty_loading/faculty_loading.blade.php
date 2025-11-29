@@ -12,12 +12,12 @@ $tabular_schedules = \App\room_schedules::distinct()->
 <link rel="stylesheet" href="{{ asset ('plugins/datatables/jquery.dataTables.css')}}">
 <section class="content-header">
     <h1><i class="fa fa-bullhorn"></i>
-        Faculty Loading Assignment
+        Faculty Schedules
         <small></small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="{{url('/')}}"><i class="fa fa-home"></i> Home</a></li>
-        <li class="active">Faculty Loading Assignment</li>
+        <li class="active">Faculty Schedules</li>
     </ol>
 </section>
 
@@ -94,7 +94,7 @@ $tabular_schedules = \App\room_schedules::distinct()->
                         </table>
                         @else
                         <div class="callout callout-warning">
-                            <div align="center"><h5>No Faculty Loading Found!</h5></div>
+                            <div align="center"><h5>No Schedules Found!</h5></div>
                         </div>
                         @endif
                     </div>

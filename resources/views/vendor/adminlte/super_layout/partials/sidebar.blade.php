@@ -60,8 +60,8 @@
                 </a>
             <ul class="treeview-menu">
             <li><a href="/admin/curiculum_management/curriculum"><i class='fa fa-edit'></i> <span>Curriculum</span></a></li>
-            <li><a href="/admin/course_offerings"><i class='fa fa-edit'></i> <span>Course Offering</span></a></li>
-            <li><a href="/admin/course_scheduling"><i class='fa fa-edit'></i> <span>Course Scheduling</span></a></li>
+            <li><a href="/admin/course_offerings"><i class='fa fa-edit'></i> <span>Course Offer</span></a></li>
+            <li><a href="/admin/course_scheduling"><i class='fa fa-edit'></i> <span>Course Schedule</span></a></li>
                 </ul>
             </li>
 

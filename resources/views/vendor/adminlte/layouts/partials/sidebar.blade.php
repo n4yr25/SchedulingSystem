@@ -60,8 +60,8 @@
                 </a>
             <ul class="treeview-menu">
             <li><a href="/admin/curiculum_management/curriculum"><i class='fa fa-edit'></i> <span>Curriculum</span></a></li>
-            <li><a href="/admin/course_offerings"><i class='fa fa-edit'></i> <span>Course Offering</span></a></li>
-            <li><a href="/admin/course_scheduling"><i class='fa fa-edit'></i> <span>Course Scheduling</span></a></li>
+            <li><a href="/admin/course_offerings"><i class='fa fa-edit'></i> <span>Course Offer</span></a></li>
+            <li><a href="/admin/course_scheduling"><i class='fa fa-edit'></i> <span>Course Schedule</span></a></li>
                 </ul>
             </li>
 
@@ -92,8 +92,8 @@
                 </li>
                          
                 
-        <?php $notifications = \App\LoadNotification::where('is_trash',0)->get();?>
-                <li class=""><a href="{{ url('/admin/notification') }}"><i class='fa fa-bell-o '></i> <span>Notifications</span> @if(count($notifications)>0)<label class="label label-warning text-warning"><i class="">{{$notifications->count()}}</i></label> @endif </a></li>
+        {{-- <?php $notifications = \App\LoadNotification::where('is_trash',0)->get();?>
+                <li class=""><a href="{{ url('/admin/notification') }}"><i class='fa fa-bell-o '></i> <span>Notifications</span> @if(count($notifications)>0)<label class="label label-warning text-warning"><i class="">{{$notifications->count()}}</i></label> @endif </a></li> --}}
                 <li class=""><a href="{{ url('/account/change_password') }}"><i class='fa fa-lock '></i> <span>Change Password</span></a></li>
                 <li class=""><a href="{{ url('/admin/database_backup/view') }}"><i class='fa fa-database '></i> <span>Database Backup</span></a></li>
 

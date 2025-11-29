@@ -6,6 +6,7 @@ use App\Database_Backup;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseBackupController extends Controller
 {
@@ -75,4 +76,22 @@ class DatabaseBackupController extends Controller
 
         return back()->with('success', 'Backup deleted successfully.');
     }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'import_file' => 'required|file|mimes:sql,txt'
+        ]);
+
+        $path = $request->file('import_file')->getRealPath();
+        $sql = file_get_contents($path);
+
+        try {
+            DB::unprepared($sql);
+            return back()->with('success', 'Database imported successfully!');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Import failed: ' . $e->getMessage());
+        }
+    }
+
 }

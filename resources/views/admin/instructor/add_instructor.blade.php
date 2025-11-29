@@ -95,7 +95,7 @@ if(Auth::user()->is_first_login == 1){
                     <div class="form-group">
                         <div class="col-sm-3">
                             <label><b>ID Number</b><span style="color:red; margin-left: 2px;">*</span></label>
-                            <input class="form form-control" id="username" name="username" placeholder="ID Number (ex: 00-AS-0000)" onkeyup="isUsernameExist()" value="{{old('instructor_id') ? old('instructor_id') : date('y')."-AS-"}}" type="text" required>
+                            <input class="form form-control" id="username" name="username" placeholder="ID Number (ex: ASIN-012345)" onkeyup="isUsernameExist()" value="{{old('instructor_id') ? old('instructor_id') : "ASIN-"}}" type="text" required>
                             <p id="usernameValidation"></p>
                         </div>
                         <div class="col-sm-9">

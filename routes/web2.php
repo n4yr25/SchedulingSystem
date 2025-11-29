@@ -101,6 +101,7 @@ Route::post('/ajax/admin/reports/update_conforme', 'Admin\SignatoriesController@
 
 Route::get('/admin/database_backup/view','Admin\DatabaseBackupController@index');
 Route::get('/admin/database_backup/save','Admin\DatabaseBackupController@save');
+Route::post('/admin/database_backup/import','Admin\DatabaseBackupController@import');
 Route::post('/admin/database_backup/restore/{id}','Admin\DatabaseBackupController@restore');
 Route::get('/admin/database_backup/download/{id}','Admin\DatabaseBackupController@download');
 Route::delete('/admin/database_backup/delete/{id}','Admin\DatabaseBackupController@destroy');
