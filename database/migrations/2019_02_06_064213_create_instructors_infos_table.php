@@ -22,6 +22,7 @@ class CreateInstructorsInfosTable extends Migration
             $table->string('street')->nullable();
             $table->string('barangay')->nullable();
             $table->string('municipality')->nullable();
+            $table->string('province')->nullable();
             $table->string('tel_no')->nullable();
             $table->string('cell_no')->nullable();
             $table->string('degree_status')->nullable();

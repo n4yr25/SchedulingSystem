@@ -147,10 +147,10 @@ if(Auth::user()->is_first_login == 1){
                                 <input class="form form-control" value="{{$info->tel_no}}" name='tel_no' placeholder='Telephone Number' value="" type="text">
                             </div>
                 
-                            <div class="col-sm-4">
+                            {{-- <div class="col-sm-4">
                                 <label><b>Cellphone Number</b></label>
                                 <input class="form form-control" value="{{$info->cell_no}}" name='cell_no' placeholder='Cellphone Number' value="" type="text">
-                            </div>
+                            </div> --}}
                        </div>
                     </div>
                 </div>

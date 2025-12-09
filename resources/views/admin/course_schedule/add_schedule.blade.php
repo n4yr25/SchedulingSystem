@@ -84,6 +84,33 @@ if(Auth::user()->is_first_login == 1){
                     @endif
                 </div>
             </div>
+            <div class="box box-solid box-default">
+                <div class="box-header  bg-navy-active">
+                    <h5 class="box-title">Time Occupied</h5>
+                </div>
+                <input type="text" id="scheduleSearch" class="form-control mb-3" placeholder="Search room or time...">
+                <div class="table-responsive">
+                    <table id="occupiedTable" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Room</th>
+                                <th>Start Time</th>
+                                <th>End Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($occupiedSchedule as $sched)
+                            <tr>
+                                <td>{{ $sched->room }}</td>
+                                <td>{{ \Carbon\Carbon::createFromFormat('H:i:s', $sched->time_starts)->format('h:i A') }}</td>
+                                <td>{{ \Carbon\Carbon::createFromFormat('H:i:s', $sched->time_end)->format('h:i A') }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
         </div>
         <div class="col-sm-8">
             <div class="box box-default">
@@ -207,6 +234,17 @@ if(Auth::user()->is_first_login == 1){
 <script type="text/javascript" src="{{ asset('/plugins/moment/moment.js') }}"></script>
 <script src="{{asset('plugins/fullcalendar/fullcalendar.js')}}"></script>
 <script>
+    document.getElementById('scheduleSearch').addEventListener('keyup', function() {
+        let value = this.value.toLowerCase();
+
+        // Get ONLY the table with ID "occupiedTable"
+        let rows = document.querySelectorAll('#occupiedTable tbody tr');
+
+        rows.forEach(row => {
+            let text = row.textContent.toLowerCase();
+            row.style.display = text.includes(value) ? '' : 'none';
+        });
+    });
 // $('.timepicker').timepicker({
 //     showInputs: false,
 // });

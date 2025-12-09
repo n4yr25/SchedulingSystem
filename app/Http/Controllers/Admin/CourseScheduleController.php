@@ -33,7 +33,9 @@ class CourseScheduleController extends Controller
         //     ->where('is_active',1)->get(['users.name','users.lastname']);
         $get_schedule = $this->getSchedule($offering_id);
         $is_complab = \App\curriculum::find($offering->curriculum_id)->is_complab;
-        return view('admin.course_schedule.add_schedule',compact('offering','curricula','inactive','offering_id','get_schedule','section_name','is_complab'));
+        
+        $occupiedSchedule = \App\room_schedules::where('is_active', 1)->get();
+        return view('admin.course_schedule.add_schedule',compact('offering','curricula','inactive','offering_id','get_schedule', 'occupiedSchedule', 'section_name','is_complab'));
     }
     
     public static function getSchedule($offering_id){

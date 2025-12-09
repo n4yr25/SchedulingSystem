@@ -38,7 +38,7 @@ class ViewInstructorsController extends Controller
         $info = \App\instructors_infos::where('instructor_id',$id)->first();
         $units = \App\UnitsLoad::where('instructor_id', $id)->first();
         $schedules = \App\room_schedules::where('instructor', $id)->get();
-        $units = 36;
+        $units = 24;
         foreach($schedules as $sched) {
             $hours = (int)$sched->time_end - (int)$sched->time_starts;
             $units -= $hours;
@@ -47,10 +47,9 @@ class ViewInstructorsController extends Controller
     }
 
     function add(Request $request) {
-           $this->create_new_instructor($request);
-           Session::flash('success','Instructor Added!');
-           return redirect(url('/admin/instructor/add_instructor'));
-        
+        $this->create_new_instructor($request);
+        Session::flash('success','Instructor Added!');
+        return redirect(url('/admin/instructor/add_instructor'));
     }
 
     function create_new_instructor($request) {
@@ -70,7 +69,7 @@ class ViewInstructorsController extends Controller
         $record->instructor_id = $user;
         $record->employee_type = $info;
         if($info == 'Full Time'){
-            $record->units = 36;
+            $record->units = 24;
         }else{
             $record->units = 15;
         }
@@ -99,6 +98,7 @@ class ViewInstructorsController extends Controller
         $add_info->street=$request->street; 
         $add_info->barangay=$request->barangay;
         $add_info->municipality=$request->municipality;
+        $add_info->province=$request->province;
         $add_info->tel_no=$request->tel_no;
         $add_info->cell_no=$request->cell_no;   
         $add_info->degree_status=$request->degree_status;
