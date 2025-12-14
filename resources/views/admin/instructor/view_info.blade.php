@@ -202,6 +202,10 @@ if(Auth::user()->is_first_login == 1){
                                 </div>
                             </div>
                         </div>
+                         <div class="col-sm-4">
+                            <label><b>Units</b><span style="color:red; margin-left: 2px;">*</span></label>
+                            <input class="form form-control" name='units' placeholder='Units' value="{{ $unit ?? 0 }}" type="number" required>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -38,12 +38,13 @@ class ViewInstructorsController extends Controller
         $info = \App\instructors_infos::where('instructor_id',$id)->first();
         $units = \App\UnitsLoad::where('instructor_id', $id)->first();
         $schedules = \App\room_schedules::where('instructor', $id)->get();
-        $units = 24;
+        $unit = $units->units;
+        $units = $units->units;
         foreach($schedules as $sched) {
             $hours = (int)$sched->time_end - (int)$sched->time_starts;
             $units -= $hours;
         }
-        return view('/admin/instructor/view_info',compact('user','info', 'units'));
+        return view('/admin/instructor/view_info',compact('user','info', 'units', 'unit'));
     }
 
     function add(Request $request) {
@@ -68,11 +69,12 @@ class ViewInstructorsController extends Controller
         $record = new \App\UnitsLoad;
         $record->instructor_id = $user;
         $record->employee_type = $info;
-        if($info == 'Full Time'){
-            $record->units = 24;
-        }else{
-            $record->units = 15;
-        }
+        $record->units = $request->units;
+        // if($info == 'Full Time'){
+        //     $record->units = 24;
+        // }else{
+        //     $record->units = 15;
+        // }
         $record->save();
     }
 
@@ -104,6 +106,7 @@ class ViewInstructorsController extends Controller
         $add_info->degree_status=$request->degree_status;
         $add_info->program_graduated=$request->program_graduated;
         $add_info->employee_type = $request->employee_type;
+        // $add_info->units = $request->units;
         $add_info->save();
     }
 
@@ -214,6 +217,7 @@ class ViewInstructorsController extends Controller
         
         $load = \App\UnitsLoad::where('instructor_id', $id)->first();
         $load->employee_type = $request->employee_type;
+        $load->units = $request->units;
         $load->update();
         
         return redirect(url('/admin/instructor/view_instructor_account'));
